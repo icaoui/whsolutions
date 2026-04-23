@@ -7,6 +7,13 @@ if (isset($_SESSION['admin_id'])) {
     exit;
 }
 
+// Check if setup is needed (password not yet hashed)
+$setupCheck = $pdo->query("SELECT password FROM admins WHERE username = 'admin' LIMIT 1")->fetch();
+if ($setupCheck && $setupCheck['password'] === 'NEEDS_SETUP') {
+    header('Location: ' . SITE_URL . '/setup.php');
+    exit;
+}
+
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = sanitize($_POST['username'] ?? '');

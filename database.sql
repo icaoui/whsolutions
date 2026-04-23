@@ -102,10 +102,10 @@ CREATE TABLE visitors (
     visited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- Default Super Admin (username: admin, password will be set by setup.php)
--- Run setup.php after importing to set password to "admin"
+-- Default Super Admin (username: admin, password: set via setup.php)
+-- After importing this SQL, visit http://localhost/whsolutions/setup.php to set password
 INSERT INTO admins (username, password, name, email, role) VALUES
-('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Super Administrateur', 'info.whsolution@gmail.com', 'super_admin');
+('admin', 'NEEDS_SETUP', 'Super Administrateur', 'info.whsolution@gmail.com', 'super_admin');
 
 -- Categories
 INSERT INTO categories (name, slug, description, icon, sort_order) VALUES
