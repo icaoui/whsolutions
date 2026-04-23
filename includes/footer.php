@@ -4,8 +4,8 @@
         <svg viewBox="0 0 1440 100" preserveAspectRatio="none"><path d="M0,50 C360,100 1080,0 1440,50 L1440,100 L0,100 Z" fill="currentColor"/></svg>
     </div>
     <div class="container">
-        <div class="footer-grid">
-            <div class="footer-col" data-aos="fade-up">
+        <div class="footer-grid" data-stagger>
+            <div class="footer-col">
                 <img src="<?= SITE_URL ?>/assets/images/logo.png" alt="<?= SITE_NAME ?>" class="footer-logo">
                 <p>Expert en Hygiène Professionnelle. Solutions performantes pour l'industrie agroalimentaire et environnementale au Maroc.</p>
                 <div class="footer-social">
@@ -14,7 +14,7 @@
                     <a href="tel:<?= SITE_PHONE ?>"><i class="fas fa-phone"></i></a>
                 </div>
             </div>
-            <div class="footer-col" data-aos="fade-up" data-aos-delay="100">
+            <div class="footer-col">
                 <h4>Liens Rapides</h4>
                 <ul>
                     <li><a href="<?= SITE_URL ?>/">Accueil</a></li>
@@ -24,7 +24,7 @@
                     <li><a href="<?= SITE_URL ?>/contact.php">Contact</a></li>
                 </ul>
             </div>
-            <div class="footer-col" data-aos="fade-up" data-aos-delay="200">
+            <div class="footer-col">
                 <h4>Nos Catégories</h4>
                 <ul>
                     <?php foreach(getCategories($pdo) as $cat): ?>
@@ -32,7 +32,7 @@
                     <?php endforeach; ?>
                 </ul>
             </div>
-            <div class="footer-col" data-aos="fade-up" data-aos-delay="300">
+            <div class="footer-col">
                 <h4>Contact</h4>
                 <ul class="footer-contact">
                     <li><i class="fas fa-phone"></i> <?= SITE_PHONE ?></li>
@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; <?= date('Y') ?> <?= SITE_NAME ?>. Tous droits réservés.</p>
+            <p>&copy; <?= date('Y') ?> <?= SITE_NAME ?>. Tous droits réservés. | Développé avec <i class="fas fa-heart" style="color:var(--accent);"></i></p>
         </div>
     </div>
 </footer>

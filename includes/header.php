@@ -15,11 +15,19 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
 <link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/style.css">
 </head>
 <body>
+<!-- Scroll Progress -->
+<div class="scroll-progress"></div>
+
+<!-- Custom Cursor -->
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
 <!-- Preloader -->
 <div id="preloader">
     <div class="loader">
         <img src="<?= SITE_URL ?>/assets/images/logo.png" alt="<?= SITE_NAME ?>">
         <div class="loader-bar"><div class="loader-progress"></div></div>
+        <div class="loader-text">Chargement...</div>
     </div>
 </div>
 

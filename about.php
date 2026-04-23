@@ -22,14 +22,14 @@ require_once 'includes/header.php';
 <section class="section about-section">
     <div class="container">
         <div class="about-grid">
-            <div class="about-image animate-on-scroll">
+            <div class="about-image animate-left">
                 <img src="<?= SITE_URL ?>/assets/images/logo.png" alt="WH Solutions" class="main-img" style="max-width:100%; padding:60px; background:var(--white); border-radius:var(--radius);">
                 <div class="experience-badge">
                     <span class="number">15+</span>
                     <span class="text">Ans d'Expérience</span>
                 </div>
             </div>
-            <div class="about-content animate-on-scroll delay-1">
+            <div class="about-content animate-right">
                 <span class="section-tag">Qui sommes-nous</span>
                 <h2>Expert en Hygiène Professionnelle au Maroc</h2>
                 <p><strong>WH Solutions</strong> est une entreprise marocaine spécialisée dans la fourniture de solutions d'hygiène professionnelle pour les secteurs agroalimentaire, industriel et environnemental.</p>
@@ -54,43 +54,43 @@ require_once 'includes/header.php';
             <span class="section-tag">Nos Avantages</span>
             <h2>Pourquoi Choisir WH Solutions ?</h2>
         </div>
-        <div class="why-grid">
-            <div class="why-item animate-on-scroll">
+        <div class="why-grid" data-stagger>
+            <div class="why-item">
                 <div class="why-icon"><i class="fas fa-award"></i></div>
                 <div>
                     <h4>Qualité Premium</h4>
                     <p>Des produits rigoureusement sélectionnés et testés pour garantir une efficacité maximale.</p>
                 </div>
             </div>
-            <div class="why-item animate-on-scroll delay-1">
+            <div class="why-item">
                 <div class="why-icon"><i class="fas fa-users"></i></div>
                 <div>
                     <h4>Équipe Experte</h4>
                     <p>Des professionnels qualifiés à votre service pour vous conseiller dans le choix de vos produits.</p>
                 </div>
             </div>
-            <div class="why-item animate-on-scroll delay-2">
+            <div class="why-item">
                 <div class="why-icon"><i class="fas fa-truck"></i></div>
                 <div>
                     <h4>Livraison Nationale</h4>
                     <p>Service de livraison fiable et rapide sur tout le Maroc.</p>
                 </div>
             </div>
-            <div class="why-item animate-on-scroll delay-3">
+            <div class="why-item">
                 <div class="why-icon"><i class="fas fa-tags"></i></div>
                 <div>
                     <h4>Prix Compétitifs</h4>
                     <p>Les meilleurs tarifs du marché avec un excellent rapport qualité-prix.</p>
                 </div>
             </div>
-            <div class="why-item animate-on-scroll">
+            <div class="why-item">
                 <div class="why-icon"><i class="fas fa-recycle"></i></div>
                 <div>
                     <h4>Éco-Responsable</h4>
                     <p>Des solutions respectueuses de l'environnement et conformes aux réglementations en vigueur.</p>
                 </div>
             </div>
-            <div class="why-item animate-on-scroll delay-1">
+            <div class="why-item">
                 <div class="why-icon"><i class="fas fa-clock"></i></div>
                 <div>
                     <h4>Disponibilité</h4>
@@ -104,7 +104,7 @@ require_once 'includes/header.php';
 <!-- CTA -->
 <section class="cta-section">
     <div class="container">
-        <div class="cta-content animate-on-scroll">
+        <div class="cta-content animate-scale">
             <h2>Prêt à collaborer avec nous ?</h2>
             <p>Contactez-nous dès maintenant pour discuter de vos besoins en hygiène professionnelle</p>
             <div style="display:flex; gap:15px; justify-content:center; flex-wrap:wrap;">

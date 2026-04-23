@@ -68,9 +68,9 @@ require_once 'includes/header.php';
         </div>
         <?php else: ?>
         <p style="text-align:center; color:var(--gray-500); margin-bottom:30px;"><?= $totalProducts ?> produit(s) trouvé(s)</p>
-        <div class="products-grid">
+        <div class="products-grid" data-stagger>
             <?php foreach($products as $prod): ?>
-            <div class="product-card animate-on-scroll">
+            <div class="product-card">
                 <div class="product-image">
                     <?php if(!empty($prod['image'])): ?>
                     <img src="<?= SITE_URL ?>/uploads/products/<?= $prod['image'] ?>" alt="<?= sanitize($prod['name']) ?>">
@@ -121,7 +121,7 @@ require_once 'includes/header.php';
 <!-- CTA -->
 <section class="cta-section">
     <div class="container">
-        <div class="cta-content animate-on-scroll">
+        <div class="cta-content animate-scale">
             <h2>Vous ne trouvez pas ce que vous cherchez ?</h2>
             <p>Contactez-nous et nous vous proposerons la solution adaptée</p>
             <a href="<?= WHATSAPP_LINK ?>" target="_blank" class="btn btn-whatsapp" style="font-size:1.1rem; padding:15px 40px;">

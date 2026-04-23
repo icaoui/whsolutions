@@ -43,7 +43,7 @@ require_once 'includes/header.php';
 
         <div class="contact-grid">
             <!-- Form -->
-            <div class="animate-on-scroll">
+            <div class="animate-left">
                 <h2 style="font-size:1.8rem; color:var(--primary); margin-bottom:10px;">Envoyez-nous un message</h2>
                 <p style="color:var(--gray-600); margin-bottom:30px;">Remplissez le formulaire ci-dessous et nous vous répondrons rapidement.</p>
                 <form method="POST">
@@ -78,7 +78,7 @@ require_once 'includes/header.php';
             </div>
 
             <!-- Contact Info -->
-            <div class="animate-on-scroll delay-1">
+            <div class="animate-right">
                 <h2 style="font-size:1.8rem; color:var(--primary); margin-bottom:10px;">Nos Coordonnées</h2>
                 <p style="color:var(--gray-600); margin-bottom:30px;">N'hésitez pas à nous contacter par le moyen qui vous convient le mieux.</p>
                 <div class="contact-info-cards">
