@@ -1,5 +1,7 @@
 <?php
-$pageTitle = 'Contact - WH Solutions';
+$pageTitle = 'Contactez WH Solutions - Hygiène Professionnelle Maroc';
+$pageDescription = 'Contactez WH Solutions pour vos besoins en hygiène professionnelle au Maroc. WhatsApp, téléphone, email. Kenitra, Maroc.';
+$pageKeywords = 'contact WH Solutions, hygiène professionnelle Kenitra, commander produits nettoyage Maroc';
 require_once 'config/config.php';
 require_once 'includes/functions.php';
 logVisitor($pdo, 'contact');

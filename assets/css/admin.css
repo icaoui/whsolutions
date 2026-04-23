@@ -107,6 +107,28 @@ a { text-decoration:none; color:inherit; }
 .btn-delete:hover { background:var(--danger); color:var(--white); }
 .actions { display:flex; gap:5px; }
 
+/* IMPROVED CARD HOVER */
+.card { transition:var(--transition); }
+.card:hover { box-shadow:var(--shadow-lg); }
+
+/* ADMIN RESPONSIVE OVERLAY */
+.sidebar-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:99; }
+.sidebar-overlay.active { display:block; }
+
+/* TABLE RESPONSIVE WRAPPER */
+.table-responsive { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+
+/* STATUS INDICATOR */
+.status-dot { width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:6px; }
+.status-dot.online { background:var(--success); }
+.status-dot.offline { background:var(--gray-500); }
+
+/* QUICK ACTIONS */
+.quick-actions { display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+.quick-action-btn { display:flex; align-items:center; gap:8px; padding:10px 18px; background:var(--white); border:2px solid var(--gray-200); border-radius:8px; font-family:var(--font); font-size:0.85rem; font-weight:600; color:var(--gray-700); cursor:pointer; transition:var(--transition); text-decoration:none; }
+.quick-action-btn:hover { border-color:var(--secondary); color:var(--secondary); transform:translateY(-2px); box-shadow:var(--shadow); }
+.quick-action-btn i { font-size:1rem; }
+
 /* RESPONSIVE */
 @media (max-width:992px) {
     .sidebar { transform:translateX(-100%); }
@@ -115,10 +137,27 @@ a { text-decoration:none; color:inherit; }
     .admin-main { margin-left:0; }
     .charts-grid, .tables-grid, .form-row { grid-template-columns:1fr; }
     .stats-grid { grid-template-columns:1fr 1fr; }
+    .admin-header { padding:12px 20px; }
+    .page-title { font-size:1.1rem; }
 }
 @media (max-width:768px) {
     .stats-grid { grid-template-columns:1fr; }
     .admin-content { padding:15px; }
+    .admin-header { padding:10px 15px; }
+    .page-title { font-size:1rem; }
     .admin-table { font-size:0.8rem; }
     .admin-table th, .admin-table td { padding:8px 10px; }
+    .card { padding:18px; }
+    .chart-card { padding:18px; }
+    .stat-card { padding:18px; }
+    .btn-admin { padding:8px 16px; font-size:0.82rem; }
+    .login-card { padding:25px; }
+    .login-container { padding:15px; }
+}
+@media (max-width:480px) {
+    .admin-content { padding:10px; }
+    .stat-card { flex-direction:column; text-align:center; gap:10px; }
+    .stat-number { font-size:1.3rem; }
+    .admin-table th, .admin-table td { padding:6px 8px; font-size:0.75rem; }
+    .actions { flex-direction:column; }
 }

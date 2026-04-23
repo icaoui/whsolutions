@@ -1,5 +1,7 @@
 <?php
-$pageTitle = 'À Propos - WH Solutions';
+$pageTitle = 'À Propos de WH Solutions - Expert Hygiène Professionnelle Maroc';
+$pageDescription = 'Découvrez WH Solutions, entreprise marocaine spécialisée en hygiène professionnelle depuis 15 ans. Kenitra, Maroc. Normes HACCP, solutions éco-responsables.';
+$pageKeywords = 'WH Solutions Maroc, entreprise hygiène Kenitra, expert nettoyage professionnel Maroc, HACCP Maroc';
 require_once 'config/config.php';
 require_once 'includes/functions.php';
 logVisitor($pdo, 'about');

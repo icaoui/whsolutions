@@ -1,5 +1,7 @@
 <?php
-$pageTitle = 'WH Solutions - Expert en Hygiène Professionnelle';
+$pageTitle = 'WH Solutions - Expert en Hygiène Professionnelle au Maroc | Nettoyage & Désinfection';
+$pageDescription = 'WH Solutions, votre expert en hygiène professionnelle au Maroc. Produits de nettoyage, désinfection, traitement des eaux conformes HACCP. Livraison partout au Maroc.';
+$pageKeywords = 'hygiène professionnelle Maroc, produits nettoyage industriel, désinfection HACCP, WH Solutions Kenitra, produits hygiène agroalimentaire';
 require_once 'config/config.php';
 require_once 'includes/functions.php';
 logVisitor($pdo, 'home');
@@ -173,6 +175,26 @@ require_once 'includes/header.php';
                 <div class="eng-icon"><i class="fas fa-handshake"></i></div>
                 <h3>Partenariat</h3>
                 <p>Accompagnement personnalisé et formation de vos équipes pour une utilisation optimale de nos produits.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Catalogue Download -->
+<section class="section catalogue-download-section">
+    <div class="container">
+        <div class="catalogue-download animate-scale">
+            <div class="catalogue-download-icon">
+                <i class="fas fa-file-pdf"></i>
+            </div>
+            <div class="catalogue-download-content">
+                <span class="section-tag">Catalogue <?= date('Y') ?></span>
+                <h2>Téléchargez Notre Catalogue Complet</h2>
+                <p>Plus de 200 produits d'hygiène professionnelle. Nettoyage, désinfection, traitement des eaux et bien plus.</p>
+                <div class="catalogue-download-buttons">
+                    <a href="catalogue.php" class="btn btn-primary"><i class="fas fa-book-open"></i> Voir le Catalogue</a>
+                    <a href="<?= CATALOGUE_PDF ?>" target="_blank" class="btn btn-outline"><i class="fas fa-download"></i> Télécharger PDF</a>
+                </div>
             </div>
         </div>
     </div>

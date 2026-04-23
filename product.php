@@ -11,7 +11,9 @@ if (!$product) { header('Location: products.php'); exit; }
 incrementProductViews($pdo, $product['id']);
 logVisitor($pdo, 'product_' . $product['id']);
 $related = getRelatedProducts($pdo, $product['id'], $product['category_id'], 4);
-$pageTitle = sanitize($product['name']) . ' - WH Solutions';
+$pageTitle = sanitize($product['name']) . ' - WH Solutions Maroc';
+$pageDescription = 'Achetez ' . sanitize($product['name']) . ' chez WH Solutions. ' . sanitize(mb_strimwidth($product['short_description'] ?? $product['description'] ?? '', 0, 130, '...')) . ' Livraison au Maroc.';
+$pageKeywords = sanitize($product['name']) . ', ' . sanitize($product['category_name']) . ', hygiène professionnelle Maroc, WH Solutions';
 
 // Handle inquiry form
 $success = $error = '';
@@ -62,7 +64,7 @@ require_once 'includes/header.php';
 
         <div class="product-detail-grid">
             <!-- Image -->
-            <div class="product-gallery animate-on-scroll">
+            <div class="product-gallery animate-left">
                 <?php if(!empty($product['image'])): ?>
                 <img src="<?= SITE_URL ?>/uploads/products/<?= $product['image'] ?>" alt="<?= sanitize($product['name']) ?>">
                 <?php else: ?>
@@ -71,7 +73,7 @@ require_once 'includes/header.php';
             </div>
 
             <!-- Info -->
-            <div class="product-detail-info animate-on-scroll delay-1">
+            <div class="product-detail-info animate-right">
                 <span class="product-category" style="display:inline-block; margin-bottom:10px;"><?= sanitize($product['category_name']) ?></span>
                 <h1><?= sanitize($product['name']) ?></h1>
                 <div class="product-meta">
@@ -133,9 +135,9 @@ require_once 'includes/header.php';
             <div class="section-header">
                 <h2>Produits Similaires</h2>
             </div>
-            <div class="products-grid">
+            <div class="products-grid" data-stagger>
                 <?php foreach($related as $rel): ?>
-                <div class="product-card animate-on-scroll">
+                <div class="product-card">
                     <div class="product-image">
                         <?php if(!empty($rel['image'])): ?>
                         <img src="<?= SITE_URL ?>/uploads/products/<?= $rel['image'] ?>" alt="<?= sanitize($rel['name']) ?>">

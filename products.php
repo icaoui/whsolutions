@@ -1,5 +1,7 @@
 <?php
-$pageTitle = 'Nos Produits - WH Solutions';
+$pageTitle = 'Nos Produits d\'Hygiène Professionnelle - WH Solutions Maroc';
+$pageDescription = 'Découvrez notre gamme complète de produits d\'hygiène professionnelle : nettoyage, désinfection, traitement des eaux, matériel de nettoyage au Maroc.';
+$pageKeywords = 'produits hygiène Maroc, nettoyage industriel, désinfection professionnelle, matériel nettoyage, consommables hygiène';
 require_once 'config/config.php';
 require_once 'includes/functions.php';
 logVisitor($pdo, 'products');

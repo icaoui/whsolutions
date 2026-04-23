@@ -35,6 +35,7 @@ $adminPage = basename($_SERVER['PHP_SELF'], '.php');
             <a href="messages.php" class="nav-item <?= $adminPage === 'messages' ? 'active' : '' ?>"><i class="fas fa-envelope"></i><span>Messages</span></a>
             <a href="inquiries.php" class="nav-item <?= $adminPage === 'inquiries' ? 'active' : '' ?>"><i class="fas fa-question-circle"></i><span>Demandes</span></a>
             <a href="visitors.php" class="nav-item <?= $adminPage === 'visitors' ? 'active' : '' ?>"><i class="fas fa-users"></i><span>Visiteurs</span></a>
+            <a href="settings.php" class="nav-item <?= $adminPage === 'settings' ? 'active' : '' ?>"><i class="fas fa-cog"></i><span>Paramètres</span></a>
             <div class="nav-divider"></div>
             <a href="<?= SITE_URL ?>/" target="_blank" class="nav-item"><i class="fas fa-globe"></i><span>Voir le Site</span></a>
             <a href="logout.php" class="nav-item"><i class="fas fa-sign-out-alt"></i><span>Déconnexion</span></a>
