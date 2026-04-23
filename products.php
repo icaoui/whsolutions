@@ -126,7 +126,7 @@ require_once 'includes/header.php';
         <div class="cta-content animate-scale">
             <h2>Vous ne trouvez pas ce que vous cherchez ?</h2>
             <p>Contactez-nous et nous vous proposerons la solution adaptée</p>
-            <a href="<?= WHATSAPP_LINK ?>" target="_blank" class="btn btn-whatsapp" style="font-size:1.1rem; padding:15px 40px;">
+            <a href="<?= getWhatsAppGeneralLink() ?>" target="_blank" class="btn btn-whatsapp" style="font-size:1.1rem; padding:15px 40px;">
                 <i class="fab fa-whatsapp"></i> Nous Contacter
             </a>
         </div>

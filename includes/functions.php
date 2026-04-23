@@ -111,9 +111,55 @@ function logVisitor($pdo, $page) {
 }
 
 function getWhatsAppOrderLink($product, $quantity = 1) {
-    $phone = WHATSAPP_NUMBER;
-    $msg = "Bonjour, je suis intéressé par le produit : *{$product['name']}*";
-    if ($quantity > 1) $msg .= " (Quantité: $quantity)";
-    $msg .= "\nMerci de me contacter pour plus d'informations.";
+    global $pdo;
+    $phone = getSetting($pdo, 'whatsapp_number', WHATSAPP_NUMBER);
+    $tpl = getSetting($pdo, 'whatsapp_order_message', '');
+    if (!empty($tpl)) {
+        $msg = str_replace(
+            ['{product}', '{quantity}'],
+            [$product['name'], $quantity],
+            $tpl
+        );
+    } else {
+        $msg = "Bonjour, je suis intéressé par le produit : *{$product['name']}*";
+        if ($quantity > 1) $msg .= " (Quantité: $quantity)";
+        $msg .= "\nMerci de me contacter pour plus d'informations.";
+    }
     return "https://wa.me/$phone?text=" . urlencode($msg);
+}
+
+function getWhatsAppGeneralLink() {
+    global $pdo;
+    $phone = getSetting($pdo, 'whatsapp_number', WHATSAPP_NUMBER);
+    $msg = getSetting($pdo, 'whatsapp_welcome_message', 'Bonjour, je souhaite avoir des informations sur vos produits d\'hygiène professionnelle.');
+    return "https://wa.me/$phone?text=" . urlencode($msg);
+}
+
+function getWhatsAppCatalogueLink() {
+    global $pdo;
+    $phone = getSetting($pdo, 'whatsapp_number', WHATSAPP_NUMBER);
+    $msg = getSetting($pdo, 'whatsapp_catalogue_message', 'Bonjour, j\'ai consulté votre catalogue et je souhaite avoir plus d\'informations sur vos produits.');
+    return "https://wa.me/$phone?text=" . urlencode($msg);
+}
+
+function getSetting($pdo, $key, $default = '') {
+    static $cache = [];
+    if (isset($cache[$key])) return $cache[$key];
+    $stmt = $pdo->prepare("SELECT setting_value FROM settings WHERE setting_key = ?");
+    $stmt->execute([$key]);
+    $val = $stmt->fetchColumn();
+    $cache[$key] = ($val !== false) ? $val : $default;
+    return $cache[$key];
+}
+
+function setSetting($pdo, $key, $value) {
+    $stmt = $pdo->prepare("INSERT INTO settings (setting_key, setting_value) VALUES (?, ?) ON DUPLICATE KEY UPDATE setting_value = ?, updated_at = CURRENT_TIMESTAMP");
+    return $stmt->execute([$key, $value, $value]);
+}
+
+function getAllSettings($pdo) {
+    $rows = $pdo->query("SELECT setting_key, setting_value FROM settings")->fetchAll();
+    $settings = [];
+    foreach ($rows as $r) $settings[$r['setting_key']] = $r['setting_value'];
+    return $settings;
 }

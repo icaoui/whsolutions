@@ -169,4 +169,7 @@ INSERT INTO settings (setting_key, setting_value) VALUES
 ('site_email', 'info.whsolution@gmail.com'),
 ('site_address', 'N°31, Rue Martir ABD Eslam Ben Mohammed - Residence Riad Zayton, Bureau N°2 Val fleury - Kenitra Maroc'),
 ('whatsapp_number', '212652020702'),
+('whatsapp_welcome_message', 'Bonjour, je souhaite avoir des informations sur vos produits d''hygiène professionnelle.'),
+('whatsapp_order_message', 'Bonjour, je souhaite commander le produit : *{product}* (Quantité: {quantity})\nMerci de me contacter pour finaliser la commande.'),
+('whatsapp_catalogue_message', 'Bonjour, j''ai consulté votre catalogue et je souhaite avoir plus d''informations sur vos produits.'),
 ('catalogue_url', 'https://drive.google.com/file/d/149LV19xcNzt5apoNIbIQvo7vI5KIB4v6/view');

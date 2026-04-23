@@ -219,11 +219,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateWhatsAppLink() {
         const qtyInput = document.querySelector('.qty-input');
         const waBtn = document.querySelector('.btn-whatsapp-order');
-        if (qtyInput && waBtn) {
+        if (qtyInput && waBtn && window.whConfig) {
             const qty = qtyInput.value;
             const productName = waBtn.getAttribute('data-product');
-            const msg = encodeURIComponent('Bonjour, je souhaite commander ' + qty + ' unité(s) de: ' + productName);
-            waBtn.href = 'https://wa.me/212652020702?text=' + msg;
+            const msg = window.whConfig.orderMsg.replace('{product}', productName).replace('{quantity}', qty);
+            waBtn.href = 'https://wa.me/' + window.whConfig.number + '?text=' + encodeURIComponent(msg);
         }
     }
 

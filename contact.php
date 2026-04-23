@@ -88,7 +88,7 @@ require_once 'includes/header.php';
                         <div class="info-icon"><i class="fab fa-whatsapp"></i></div>
                         <div>
                             <h4>WhatsApp</h4>
-                            <p><a href="<?= WHATSAPP_LINK ?>" target="_blank" style="color:var(--secondary);"><?= SITE_PHONE ?></a></p>
+                            <p><a href="<?= getWhatsAppGeneralLink() ?>" target="_blank" style="color:var(--secondary);"><?= SITE_PHONE ?></a></p>
                             <p style="font-size:0.8rem;">Commande rapide & Support</p>
                         </div>
                     </div>
@@ -120,7 +120,7 @@ require_once 'includes/header.php';
                 <div style="margin-top:30px; padding:25px; background:linear-gradient(135deg, #25D366, #128C7E); border-radius:var(--radius); text-align:center;">
                     <h3 style="color:var(--white); margin-bottom:10px;"><i class="fab fa-whatsapp"></i> Commander par WhatsApp</h3>
                     <p style="color:rgba(255,255,255,0.9); font-size:0.9rem; margin-bottom:15px;">Le moyen le plus rapide pour passer commande</p>
-                    <a href="<?= WHATSAPP_LINK ?>" target="_blank" class="btn" style="background:var(--white); color:#25D366; font-weight:700; padding:12px 30px;">
+                    <a href="<?= getWhatsAppGeneralLink() ?>" target="_blank" class="btn" style="background:var(--white); color:#25D366; font-weight:700; padding:12px 30px;">
                         Ouvrir WhatsApp
                     </a>
                 </div>

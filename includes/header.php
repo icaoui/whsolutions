@@ -94,7 +94,7 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
 </div>
 
 <!-- WhatsApp Float Button -->
-<a href="<?= WHATSAPP_LINK ?>" target="_blank" class="whatsapp-float" title="Commander via WhatsApp">
+<a href="<?= getWhatsAppGeneralLink() ?>" target="_blank" class="whatsapp-float" title="Commander via WhatsApp">
     <i class="fab fa-whatsapp"></i>
     <span>Commander</span>
 </a>
@@ -121,7 +121,7 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
             <li><a href="<?= SITE_URL ?>/catalogue.php" class="<?= $currentPage === 'catalogue' ? 'active' : '' ?>">Catalogue</a></li>
             <li><a href="<?= SITE_URL ?>/about.php" class="<?= $currentPage === 'about' ? 'active' : '' ?>">À Propos</a></li>
             <li><a href="<?= SITE_URL ?>/contact.php" class="<?= $currentPage === 'contact' ? 'active' : '' ?>">Contact</a></li>
-            <li><a href="<?= WHATSAPP_LINK ?>" target="_blank" class="nav-cta"><i class="fab fa-whatsapp"></i> Commander</a></li>
+            <li><a href="<?= getWhatsAppGeneralLink() ?>" target="_blank" class="nav-cta"><i class="fab fa-whatsapp"></i> Commander</a></li>
         </ul>
     </div>
 </nav>

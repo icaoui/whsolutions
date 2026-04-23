@@ -9,7 +9,7 @@
                 <img src="<?= SITE_URL ?>/assets/images/logo.png" alt="<?= SITE_NAME ?>" class="footer-logo">
                 <p>Expert en Hygiène Professionnelle. Solutions performantes pour l'industrie agroalimentaire et environnementale au Maroc.</p>
                 <div class="footer-social">
-                    <a href="<?= WHATSAPP_LINK ?>" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="<?= getWhatsAppGeneralLink() ?>" target="_blank"><i class="fab fa-whatsapp"></i></a>
                     <a href="mailto:<?= SITE_EMAIL ?>"><i class="fas fa-envelope"></i></a>
                     <a href="tel:<?= SITE_PHONE ?>"><i class="fas fa-phone"></i></a>
                 </div>

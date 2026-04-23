@@ -43,7 +43,7 @@ require_once 'includes/header.php';
                     <li><i class="fas fa-check-circle"></i> Livraison sur tout le territoire marocain</li>
                     <li><i class="fas fa-check-circle"></i> Support réactif et service après-vente</li>
                 </ul>
-                <a href="<?= WHATSAPP_LINK ?>" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Nous Contacter</a>
+                <a href="<?= getWhatsAppGeneralLink() ?>" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Nous Contacter</a>
             </div>
         </div>
     </div>
@@ -110,7 +110,7 @@ require_once 'includes/header.php';
             <h2>Prêt à collaborer avec nous ?</h2>
             <p>Contactez-nous dès maintenant pour discuter de vos besoins en hygiène professionnelle</p>
             <div style="display:flex; gap:15px; justify-content:center; flex-wrap:wrap;">
-                <a href="<?= WHATSAPP_LINK ?>" target="_blank" class="btn btn-whatsapp" style="font-size:1.1rem; padding:15px 40px;">
+                <a href="<?= getWhatsAppGeneralLink() ?>" target="_blank" class="btn btn-whatsapp" style="font-size:1.1rem; padding:15px 40px;">
                     <i class="fab fa-whatsapp"></i> WhatsApp
                 </a>
                 <a href="contact.php" class="btn btn-outline" style="font-size:1.1rem; padding:15px 40px; color:var(--white); border-color:var(--white);">

@@ -160,4 +160,11 @@ require_once 'includes/header.php';
     </div>
 </section>
 
+<script>
+window.whConfig = {
+    number: '<?= sanitize(getSetting($pdo, "whatsapp_number", WHATSAPP_NUMBER)) ?>',
+    orderMsg: <?= json_encode(getSetting($pdo, 'whatsapp_order_message', 'Bonjour, je souhaite commander le produit : *{product}* (Quantité: {quantity})'), JSON_UNESCAPED_UNICODE) ?>
+};
+</script>
+
 <?php require_once 'includes/footer.php'; ?>

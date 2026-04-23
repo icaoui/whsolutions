@@ -23,7 +23,7 @@ require_once 'includes/header.php';
             <p class="hero-subtitle">Solutions performantes de nettoyage, désinfection et traitement pour l'industrie agroalimentaire et environnementale au Maroc.</p>
             <div class="hero-buttons">
                 <a href="products.php" class="btn btn-primary"><i class="fas fa-box-open"></i> Découvrir nos Produits</a>
-                <a href="<?= WHATSAPP_LINK ?>" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Commander via WhatsApp</a>
+                <a href="<?= getWhatsAppGeneralLink() ?>" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Commander via WhatsApp</a>
             </div>
             <div class="hero-stats">
                 <div class="hero-stat"><span class="number counter" data-target="200">0+</span><span class="label">Produits</span></div>
@@ -206,7 +206,7 @@ require_once 'includes/header.php';
         <div class="cta-content animate-scale">
             <h2>Besoin d'un devis personnalisé ?</h2>
             <p>Contactez-nous via WhatsApp pour recevoir une offre adaptée à vos besoins</p>
-            <a href="<?= WHATSAPP_LINK ?>" target="_blank" class="btn btn-whatsapp" style="font-size:1.1rem; padding:18px 45px;">
+            <a href="<?= getWhatsAppGeneralLink() ?>" target="_blank" class="btn btn-whatsapp" style="font-size:1.1rem; padding:18px 45px;">
                 <i class="fab fa-whatsapp"></i> Demander un Devis
             </a>
         </div>

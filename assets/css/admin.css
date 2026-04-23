@@ -91,6 +91,7 @@ a { text-decoration:none; color:inherit; }
 .form-group input, .form-group textarea, .form-group select { width:100%; padding:10px 14px; border:2px solid var(--gray-200); border-radius:8px; font-family:var(--font); font-size:0.9rem; transition:var(--transition); }
 .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color:var(--secondary); outline:none; box-shadow:0 0 0 3px rgba(78,205,196,0.15); }
 .form-group textarea { min-height:100px; resize:vertical; }
+.form-group small code { background:var(--gray-100); padding:2px 6px; border-radius:4px; font-size:0.82rem; color:var(--primary); }
 .form-row { display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:end; }
 .checkbox-label { display:flex; align-items:center; gap:8px; font-size:0.9rem; cursor:pointer; padding:10px 0; }
 
