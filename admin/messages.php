@@ -4,9 +4,11 @@ require_once 'includes/header.php';
 
 if (isset($_GET['delete'])) {
     $pdo->prepare("DELETE FROM messages WHERE id = ?")->execute([intval($_GET['delete'])]);
+    logAdminActivity($pdo, $_SESSION['admin_id'], 'delete_message', "Suppression message #" . intval($_GET['delete']));
 }
 if (isset($_GET['read'])) {
     $pdo->prepare("UPDATE messages SET is_read = 1 WHERE id = ?")->execute([intval($_GET['read'])]);
+    logAdminActivity($pdo, $_SESSION['admin_id'], 'read_message', "Lecture message #" . intval($_GET['read']));
 }
 
 $messages = $pdo->query("SELECT * FROM messages ORDER BY created_at DESC")->fetchAll();

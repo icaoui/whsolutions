@@ -609,3 +609,16 @@ img { max-width: 100%; height: auto; }
     .product-gallery { min-height: 250px; }
     .quantity-selector { flex-direction: column; align-items: flex-start; }
 }
+
+@media (max-width: 320px) {
+    .hero-content h1 { font-size: 1.5rem; }
+    .hero-subtitle { font-size: 0.9rem; }
+    .section-header h2 { font-size: 1.3rem; }
+    .btn { padding: 10px 20px; font-size: 0.85rem; }
+    .feature-card { padding: 20px 15px; }
+    .engagement-card { padding: 20px 15px; }
+    .category-card { padding: 20px 12px; }
+    .product-detail-info h1 { font-size: 1.2rem; }
+    .navbar-brand img { height: 36px; }
+    .order-modal { width: 95%; padding: 20px; }
+}

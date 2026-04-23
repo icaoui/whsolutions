@@ -6,6 +6,20 @@ function sanitize($data) {
     return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
 }
 
+function isSuperAdmin() {
+    return isset($_SESSION['admin_role']) && $_SESSION['admin_role'] === 'super_admin';
+}
+
+function logAdminActivity($pdo, $adminId, $action, $details = '') {
+    try {
+        $ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+        $stmt = $pdo->prepare("INSERT INTO admin_activity_log (admin_id, action, details, ip_address) VALUES (?, ?, ?, ?)");
+        $stmt->execute([intval($adminId), $action, $details, $ip]);
+    } catch (Exception $e) {
+        // Table may not exist yet - silently fail
+    }
+}
+
 function slugify($text) {
     $text = preg_replace('~[^\pL\d]+~u', '-', $text);
     $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);

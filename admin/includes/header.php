@@ -6,6 +6,17 @@ if (!isset($_SESSION['admin_id'])) {
     header('Location: login.php');
     exit;
 }
+// Check if account is still active
+$adminCheck = $pdo->prepare("SELECT is_active, role, name FROM admins WHERE id = ?");
+$adminCheck->execute([$_SESSION['admin_id']]);
+$currentAdmin = $adminCheck->fetch();
+if (!$currentAdmin || (isset($currentAdmin['is_active']) && !$currentAdmin['is_active'])) {
+    session_destroy();
+    header('Location: login.php');
+    exit;
+}
+$_SESSION['admin_role'] = $currentAdmin['role'] ?? 'admin';
+$_SESSION['admin_name'] = $currentAdmin['name'] ?? 'Admin';
 $adminPage = basename($_SERVER['PHP_SELF'], '.php');
 ?>
 <!DOCTYPE html>
@@ -36,6 +47,12 @@ $adminPage = basename($_SERVER['PHP_SELF'], '.php');
             <a href="inquiries.php" class="nav-item <?= $adminPage === 'inquiries' ? 'active' : '' ?>"><i class="fas fa-question-circle"></i><span>Demandes</span></a>
             <a href="visitors.php" class="nav-item <?= $adminPage === 'visitors' ? 'active' : '' ?>"><i class="fas fa-users"></i><span>Visiteurs</span></a>
             <a href="settings.php" class="nav-item <?= $adminPage === 'settings' ? 'active' : '' ?>"><i class="fas fa-cog"></i><span>Paramètres</span></a>
+            <?php if(isSuperAdmin()): ?>
+            <div class="nav-divider"></div>
+            <span class="nav-label">Super Admin</span>
+            <a href="users.php" class="nav-item <?= $adminPage === 'users' ? 'active' : '' ?>"><i class="fas fa-user-shield"></i><span>Utilisateurs</span></a>
+            <a href="activity.php" class="nav-item <?= $adminPage === 'activity' ? 'active' : '' ?>"><i class="fas fa-history"></i><span>Journal d'activité</span></a>
+            <?php endif; ?>
             <div class="nav-divider"></div>
             <a href="<?= SITE_URL ?>/" target="_blank" class="nav-item"><i class="fas fa-globe"></i><span>Voir le Site</span></a>
             <a href="logout.php" class="nav-item"><i class="fas fa-sign-out-alt"></i><span>Déconnexion</span></a>
@@ -47,7 +64,12 @@ $adminPage = basename($_SERVER['PHP_SELF'], '.php');
             <button class="sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
             <h1 class="page-title"><?= $adminTitle ?? 'Dashboard' ?></h1>
             <div class="admin-user">
-                <span>Admin</span>
+                <span><?= sanitize($_SESSION['admin_name'] ?? 'Admin') ?></span>
+                <?php if(isSuperAdmin()): ?>
+                <span class="role-badge role-super">Super</span>
+                <?php else: ?>
+                <span class="role-badge role-admin">Admin</span>
+                <?php endif; ?>
                 <i class="fas fa-user-circle"></i>
             </div>
         </header>

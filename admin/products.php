@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'toggl
     header('Content-Type: application/json');
     $field = $_POST['field'] === 'is_featured' ? 'is_featured' : 'is_active';
     $pdo->prepare("UPDATE products SET $field = ? WHERE id = ?")->execute([intval($_POST['val']), intval($_POST['id'])]);
+    logAdminActivity($pdo, $_SESSION['admin_id'], 'toggle_product', "$field=" . $_POST['val'] . " pour produit #" . $_POST['id']);
     echo json_encode(['ok' => true]); exit;
 }
 
@@ -31,6 +32,7 @@ if (isset($_GET['duplicate'])) {
         $pdo->prepare("INSERT INTO products (name, slug, category_id, short_description, description, reference, image, is_featured, is_active, sort_order) VALUES (?,?,?,?,?,?,?,?,0,?)")
             ->execute(['[Copie] ' . $orig['name'], $newSlug, $orig['category_id'], $orig['short_description'], $orig['description'], $orig['reference'], $orig['image'], $orig['is_featured'], $orig['sort_order'] + 1]);
         $success = 'Produit dupliqué. Modifiez la copie ci-dessous.';
+        logAdminActivity($pdo, $_SESSION['admin_id'], 'duplicate_product', "Duplication de: " . $orig['name']);
         header('Location: products.php?edit=' . $pdo->lastInsertId()); exit;
     }
 }
@@ -44,6 +46,7 @@ if (isset($_GET['delete'])) {
             unlink(PRODUCTS_UPLOAD_PATH . $prod['image']);
         }
         $pdo->prepare("DELETE FROM products WHERE id = ?")->execute([$id]);
+        logAdminActivity($pdo, $_SESSION['admin_id'], 'delete_product', "Suppression: " . $prod['name']);
         $success = 'Produit supprimé avec succès.';
     }
 }
@@ -91,10 +94,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['action'])) {
             $sql .= " WHERE id=?";
             $params[] = $id;
             $pdo->prepare($sql)->execute($params);
+            logAdminActivity($pdo, $_SESSION['admin_id'], 'edit_product', "Modification: $name");
             $success = 'Produit modifié avec succès.';
         } else {
             $pdo->prepare("INSERT INTO products (name, slug, category_id, short_description, description, reference, image, is_featured, is_active, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?)")
                 ->execute([$name, $slug, $categoryId, $shortDesc, $desc, $ref, $imageName, $isFeatured, $isActive, $sortOrder]);
+            logAdminActivity($pdo, $_SESSION['admin_id'], 'add_product', "Ajout: $name");
             $success = 'Produit ajouté avec succès.';
         }
     }

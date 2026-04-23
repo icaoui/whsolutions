@@ -18,11 +18,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$username]);
         $admin = $stmt->fetch();
         if ($admin && password_verify($password, $admin['password'])) {
-            $_SESSION['admin_id'] = $admin['id'];
-            $_SESSION['admin_username'] = $admin['username'];
-            $pdo->prepare("UPDATE admins SET last_login = NOW() WHERE id = ?")->execute([$admin['id']]);
-            header('Location: index.php');
-            exit;
+            if (isset($admin['is_active']) && !$admin['is_active']) {
+                $error = 'Ce compte est désactivé. Contactez le super administrateur.';
+            } else {
+                $_SESSION['admin_id'] = $admin['id'];
+                $_SESSION['admin_username'] = $admin['username'];
+                $_SESSION['admin_name'] = $admin['name'];
+                $_SESSION['admin_role'] = $admin['role'] ?? 'admin';
+                $pdo->prepare("UPDATE admins SET last_login = NOW() WHERE id = ?")->execute([$admin['id']]);
+                logAdminActivity($pdo, $admin['id'], 'login', 'Connexion réussie');
+                header('Location: index.php');
+                exit;
+            }
         } else {
             $error = 'Identifiants incorrects.';
         }

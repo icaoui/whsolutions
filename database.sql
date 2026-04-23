@@ -9,7 +9,21 @@ CREATE TABLE admins (
     password VARCHAR(255) NOT NULL,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100),
+    role ENUM('super_admin','admin') DEFAULT 'admin',
+    is_active TINYINT(1) DEFAULT 1,
+    last_login DATETIME DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+-- Admin Activity Log
+CREATE TABLE admin_activity_log (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    admin_id INT,
+    action VARCHAR(100) NOT NULL,
+    details TEXT,
+    ip_address VARCHAR(45),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (admin_id) REFERENCES admins(id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
 -- Categories
@@ -88,9 +102,10 @@ CREATE TABLE visitors (
     visited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- Default Admin (password: admin123)
-INSERT INTO admins (username, password, name, email) VALUES
-('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrateur', 'info.whsolution@gmail.com');
+-- Default Super Admin (username: admin, password will be set by setup.php)
+-- Run setup.php after importing to set password to "admin"
+INSERT INTO admins (username, password, name, email, role) VALUES
+('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Super Administrateur', 'info.whsolution@gmail.com', 'super_admin');
 
 -- Categories
 INSERT INTO categories (name, slug, description, icon, sort_order) VALUES

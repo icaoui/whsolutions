@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         } else {
             $hash = password_hash($new, PASSWORD_DEFAULT);
             $pdo->prepare("UPDATE admins SET password = ? WHERE id = ?")->execute([$hash, $_SESSION['admin_id']]);
+            logAdminActivity($pdo, $_SESSION['admin_id'], 'change_password', 'Changement de mot de passe');
             $success = 'Mot de passe modifié avec succès.';
         }
     }
@@ -33,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         setSetting($pdo, 'whatsapp_welcome_message', $_POST['whatsapp_welcome_message'] ?? '');
         setSetting($pdo, 'whatsapp_order_message', $_POST['whatsapp_order_message'] ?? '');
         setSetting($pdo, 'whatsapp_catalogue_message', $_POST['whatsapp_catalogue_message'] ?? '');
+        logAdminActivity($pdo, $_SESSION['admin_id'], 'update_settings', 'Modification paramètres WhatsApp');
         $success = 'Paramètres WhatsApp mis à jour avec succès.';
     }
 
@@ -42,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         setSetting($pdo, 'site_phone', sanitize($_POST['site_phone'] ?? ''));
         setSetting($pdo, 'site_email', sanitize($_POST['site_email'] ?? ''));
         setSetting($pdo, 'site_address', sanitize($_POST['site_address'] ?? ''));
+        logAdminActivity($pdo, $_SESSION['admin_id'], 'update_settings', 'Modification infos du site');
         $success = 'Informations du site mises à jour.';
     }
 

@@ -4,10 +4,12 @@ require_once 'includes/header.php';
 
 if (isset($_GET['delete'])) {
     $pdo->prepare("DELETE FROM inquiries WHERE id = ?")->execute([intval($_GET['delete'])]);
+    logAdminActivity($pdo, $_SESSION['admin_id'], 'delete_inquiry', "Suppression demande #" . intval($_GET['delete']));
 }
 if (isset($_GET['status']) && isset($_GET['id'])) {
     $status = in_array($_GET['status'], ['new','contacted','completed','cancelled']) ? $_GET['status'] : 'new';
     $pdo->prepare("UPDATE inquiries SET status = ? WHERE id = ?")->execute([$status, intval($_GET['id'])]);
+    logAdminActivity($pdo, $_SESSION['admin_id'], 'update_inquiry', "Statut demande #" . intval($_GET['id']) . " -> $status");
 }
 
 $inquiries = $pdo->query("SELECT i.*, p.name as product_name FROM inquiries i LEFT JOIN products p ON i.product_id = p.id ORDER BY i.created_at DESC")->fetchAll();

@@ -26,6 +26,7 @@ if (isset($_GET['delete'])) {
         $error = 'Impossible de supprimer : des produits sont liés à cette catégorie.';
     } else {
         $pdo->prepare("DELETE FROM categories WHERE id = ?")->execute([$id]);
+        logAdminActivity($pdo, $_SESSION['admin_id'], 'delete_category', "Suppression catégorie #$id");
         $success = 'Catégorie supprimée.';
     }
 }
@@ -33,6 +34,7 @@ if (isset($_GET['delete'])) {
 // Toggle active
 if (isset($_GET['toggle']) && isset($_GET['val'])) {
     $pdo->prepare("UPDATE categories SET is_active = ? WHERE id = ?")->execute([intval($_GET['val']), intval($_GET['toggle'])]);
+    logAdminActivity($pdo, $_SESSION['admin_id'], 'toggle_category', "Activation/désactivation catégorie #" . $_GET['toggle']);
     header('Location: categories.php'); exit;
 }
 
@@ -51,10 +53,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') !== 'reord
         if ($id > 0) {
             $pdo->prepare("UPDATE categories SET name=?, slug=?, description=?, icon=?, is_active=?, sort_order=? WHERE id=?")
                 ->execute([$name, $slug, $desc, $icon, $isActive, $sortOrder, $id]);
+            logAdminActivity($pdo, $_SESSION['admin_id'], 'edit_category', "Modification: $name");
             $success = 'Catégorie modifiée avec succès.';
         } else {
             $pdo->prepare("INSERT INTO categories (name, slug, description, icon, is_active, sort_order) VALUES (?,?,?,?,?,?)")
                 ->execute([$name, $slug, $desc, $icon, $isActive, $sortOrder]);
+            logAdminActivity($pdo, $_SESSION['admin_id'], 'add_category', "Ajout: $name");
             $success = 'Catégorie ajoutée avec succès.';
         }
     }
