@@ -1,14 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    /* ─── PRELOADER ─── */
-    const preloader = document.getElementById('preloader');
-    if (preloader) {
-        window.addEventListener('load', () => {
-            setTimeout(() => { preloader.classList.add('hidden'); setTimeout(() => preloader.remove(), 800); }, 800);
-        });
-        setTimeout(() => { preloader.classList.add('hidden'); }, 4000);
-    }
-
     /* ─── SCROLL PROGRESS BAR ─── */
     const scrollProgress = document.querySelector('.scroll-progress');
     if (scrollProgress) {
@@ -16,30 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const scrollTop = window.scrollY;
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
             scrollProgress.style.width = (scrollTop / docHeight * 100) + '%';
-        });
-    }
-
-    /* ─── CUSTOM CURSOR ─── */
-    const cursorDot = document.querySelector('.cursor-dot');
-    const cursorRing = document.querySelector('.cursor-ring');
-    if (cursorDot && cursorRing && window.innerWidth > 992) {
-        let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-        document.addEventListener('mousemove', e => {
-            mouseX = e.clientX; mouseY = e.clientY;
-            cursorDot.style.left = mouseX + 'px';
-            cursorDot.style.top = mouseY + 'px';
-        });
-        function animateCursor() {
-            ringX += (mouseX - ringX) * 0.15;
-            ringY += (mouseY - ringY) * 0.15;
-            cursorRing.style.left = ringX + 'px';
-            cursorRing.style.top = ringY + 'px';
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-        document.querySelectorAll('a, button, .btn, .product-card, .category-card, .feature-card').forEach(el => {
-            el.addEventListener('mouseenter', () => { cursorRing.classList.add('hover'); cursorDot.style.transform = 'scale(2)'; });
-            el.addEventListener('mouseleave', () => { cursorRing.classList.remove('hover'); cursorDot.style.transform = 'scale(1)'; });
         });
     }
 
@@ -163,25 +130,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    /* ─── MAGNETIC BUTTONS ─── */
-    if (window.innerWidth > 992) {
-        document.querySelectorAll('.btn, .nav-cta').forEach(btn => {
-            btn.addEventListener('mousemove', function(e) {
-                const rect = this.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                this.style.transform += ` translate(${x * 0.15}px, ${y * 0.15}px)`;
-            });
-            btn.addEventListener('mouseleave', function() {
-                this.style.transform = '';
-            });
-        });
-    }
-
-    /* ─── HERO PARTICLES ─── */
+    /* ─── HERO PARTICLES (cont.) ─── */
     const particleContainer = document.querySelector('.hero-particles');
     if (particleContainer) {
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 12; i++) {
             const p = document.createElement('div');
             p.className = 'hero-particle';
             p.style.left = Math.random() * 100 + '%';

@@ -70,28 +70,17 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
 
 <link rel="icon" href="<?= SITE_URL ?>/assets/images/logo.png" type="image/png">
 <link rel="apple-touch-icon" href="<?= SITE_URL ?>/assets/images/logo.png">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap">
 <link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
 </head>
 <body>
 <!-- Scroll Progress -->
 <div class="scroll-progress"></div>
-
-<!-- Custom Cursor -->
-<div class="cursor-dot"></div>
-<div class="cursor-ring"></div>
-
-<!-- Preloader -->
-<div id="preloader">
-    <div class="loader">
-        <img src="<?= SITE_URL ?>/assets/images/logo.png" alt="<?= SITE_NAME ?>">
-        <div class="loader-bar"><div class="loader-progress"></div></div>
-        <div class="loader-text">Chargement...</div>
-    </div>
-</div>
 
 <!-- WhatsApp Float Button -->
 <a href="<?= getWhatsAppGeneralLink() ?>" target="_blank" class="whatsapp-float" title="Commander via WhatsApp">

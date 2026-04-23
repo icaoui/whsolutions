@@ -50,6 +50,6 @@
 <!-- Back to Top -->
 <button id="backToTop" class="back-to-top" aria-label="Retour en haut"><i class="fas fa-arrow-up"></i></button>
 
-<script src="<?= SITE_URL ?>/assets/js/main.js"></script>
+<script src="<?= SITE_URL ?>/assets/js/main.js" defer></script>
 </body>
 </html>
