@@ -116,24 +116,6 @@ $totalViews = array_sum(array_column($products, 'views'));
 $featuredCount = count(array_filter($products, fn($p) => $p['is_featured']));
 $activeCount = count(array_filter($products, fn($p) => $p['is_active']));
 ?>
-            $success = 'Produit modifié avec succès.';
-        } else {
-            $pdo->prepare("INSERT INTO products (name, slug, category_id, short_description, description, reference, image, is_featured, is_active, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?)")
-                ->execute([$name, $slug, $categoryId, $shortDesc, $desc, $ref, $imageName, $isFeatured, $isActive, $sortOrder]);
-            $success = 'Produit ajouté avec succès.';
-        }
-    }
-}
-
-$categories = getCategories($pdo, false);
-$products = $pdo->query("SELECT p.*, c.name as category_name FROM products p LEFT JOIN categories c ON p.category_id = c.id ORDER BY p.sort_order ASC, p.id DESC")->fetchAll();
-
-// Edit mode
-$editProduct = null;
-if (isset($_GET['edit'])) {
-    $editProduct = getProductById($pdo, intval($_GET['edit']));
-}
-?>
 
 <?php if($success): ?><div class="alert alert-success"><i class="fas fa-check-circle"></i> <?= $success ?></div><?php endif; ?>
 <?php if($error): ?><div class="alert alert-error"><i class="fas fa-exclamation-circle"></i> <?= $error ?></div><?php endif; ?>

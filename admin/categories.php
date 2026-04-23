@@ -47,17 +47,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') !== 'reord
     $isActive = isset($_POST['is_active']) ? 1 : 0;
     $sortOrder = intval($_POST['sort_order'] ?? 0);
 
+    // Handle image upload
+    $imageName = '';
+    if (!empty($_FILES['image']['name'])) {
+        $ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+        $allowed = ['jpg','jpeg','png','gif','webp'];
+        if (in_array($ext, $allowed) && $_FILES['image']['size'] <= 5 * 1024 * 1024) {
+            $imageName = 'cat-' . $slug . '-' . time() . '.' . $ext;
+            $uploadDir = __DIR__ . '/../uploads/categories/';
+            if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
+            move_uploaded_file($_FILES['image']['tmp_name'], $uploadDir . $imageName);
+        } else {
+            $error = 'Image invalide. Formats: JPG, PNG, GIF, WEBP. Max 5 Mo.';
+        }
+    }
+
+    // Remove image if requested
+    if (isset($_POST['remove_image']) && $id > 0) {
+        $old = $pdo->prepare("SELECT image FROM categories WHERE id = ?");
+        $old->execute([$id]);
+        $oldImg = $old->fetchColumn();
+        if ($oldImg && file_exists(__DIR__ . '/../uploads/categories/' . $oldImg)) {
+            unlink(__DIR__ . '/../uploads/categories/' . $oldImg);
+        }
+        $pdo->prepare("UPDATE categories SET image = NULL WHERE id = ?")->execute([$id]);
+    }
+
     if (empty($name)) {
         $error = 'Le nom est obligatoire.';
-    } else {
+    } elseif (!$error) {
         if ($id > 0) {
-            $pdo->prepare("UPDATE categories SET name=?, slug=?, description=?, icon=?, is_active=?, sort_order=? WHERE id=?")
-                ->execute([$name, $slug, $desc, $icon, $isActive, $sortOrder, $id]);
+            $sql = "UPDATE categories SET name=?, slug=?, description=?, icon=?, is_active=?, sort_order=?";
+            $params = [$name, $slug, $desc, $icon, $isActive, $sortOrder];
+            if ($imageName) {
+                // Delete old image
+                $old = $pdo->prepare("SELECT image FROM categories WHERE id = ?");
+                $old->execute([$id]);
+                $oldImg = $old->fetchColumn();
+                if ($oldImg && file_exists(__DIR__ . '/../uploads/categories/' . $oldImg)) {
+                    unlink(__DIR__ . '/../uploads/categories/' . $oldImg);
+                }
+                $sql .= ", image=?";
+                $params[] = $imageName;
+            }
+            $sql .= " WHERE id=?";
+            $params[] = $id;
+            $pdo->prepare($sql)->execute($params);
             logAdminActivity($pdo, $_SESSION['admin_id'], 'edit_category', "Modification: $name");
             $success = 'Catégorie modifiée avec succès.';
         } else {
-            $pdo->prepare("INSERT INTO categories (name, slug, description, icon, is_active, sort_order) VALUES (?,?,?,?,?,?)")
-                ->execute([$name, $slug, $desc, $icon, $isActive, $sortOrder]);
+            $pdo->prepare("INSERT INTO categories (name, slug, description, icon, image, is_active, sort_order) VALUES (?,?,?,?,?,?,?)")
+                ->execute([$name, $slug, $desc, $icon, $imageName ?: null, $isActive, $sortOrder]);
             logAdminActivity($pdo, $_SESSION['admin_id'], 'add_category', "Ajout: $name");
             $success = 'Catégorie ajoutée avec succès.';
         }
@@ -97,7 +137,7 @@ $popularIcons = ['fas fa-spray-can','fas fa-water','fas fa-hands-wash','fas fa-b
 <!-- Form -->
 <div class="card" style="margin-bottom:25px;">
     <h3><i class="fas fa-<?= $editCat ? 'edit' : 'plus' ?>"></i> <?= $editCat ? 'Modifier' : 'Ajouter' ?> une Catégorie</h3>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= $editCat['id'] ?? 0 ?>">
         <div class="form-row">
             <div class="form-group">
@@ -120,6 +160,21 @@ $popularIcons = ['fas fa-spray-can','fas fa-water','fas fa-hands-wash','fas fa-b
             <label>Description</label>
             <textarea name="description" rows="3" placeholder="Décrivez cette catégorie..."><?= sanitize($editCat['description'] ?? '') ?></textarea>
         </div>
+        <div class="form-group">
+            <label><i class="fas fa-image"></i> Image de la Catégorie</label>
+            <div class="image-preview-zone" id="catImgZone" onclick="document.getElementById('catImgInput').click()">
+                <?php if(!empty($editCat['image'])): ?>
+                <img src="<?= SITE_URL ?>/uploads/categories/<?= sanitize($editCat['image']) ?>" alt="Image catégorie" id="catImgPreview">
+                <?php else: ?>
+                <div class="preview-text" id="catImgText"><i class="fas fa-cloud-upload-alt"></i> Cliquez ou glissez une image ici<br><small>JPG, PNG, GIF, WEBP - Max 5 Mo</small></div>
+                <img src="" alt="" id="catImgPreview" style="display:none;">
+                <?php endif; ?>
+            </div>
+            <input type="file" name="image" id="catImgInput" accept="image/*" style="display:none;" onchange="previewCatImg(this)">
+            <?php if(!empty($editCat['image'])): ?>
+            <label style="margin-top:8px; font-size:0.85rem; cursor:pointer; color:var(--danger);"><input type="checkbox" name="remove_image" value="1"> <i class="fas fa-trash-alt"></i> Supprimer l'image actuelle</label>
+            <?php endif; ?>
+        </div>
         <div class="form-row">
             <div class="form-group"><label>Ordre d'affichage</label><input type="number" name="sort_order" value="<?= $editCat['sort_order'] ?? 0 ?>" min="0"></div>
             <label class="checkbox-label"><input type="checkbox" name="is_active" <?= ($editCat['is_active'] ?? 1) ? 'checked' : '' ?> checked> Active</label>
@@ -139,7 +194,13 @@ $popularIcons = ['fas fa-spray-can','fas fa-water','fas fa-hands-wash','fas fa-b
         <?php foreach($categories as $c): ?>
         <div class="sortable-item" data-id="<?= $c['id'] ?>">
             <div class="sortable-handle"><i class="fas fa-grip-vertical"></i></div>
-            <div class="sortable-icon"><i class="<?= sanitize($c['icon']) ?>"></i></div>
+            <div class="sortable-icon">
+                <?php if(!empty($c['image'])): ?>
+                <img src="<?= SITE_URL ?>/uploads/categories/<?= sanitize($c['image']) ?>" alt="" style="width:40px;height:40px;border-radius:10px;object-fit:cover;">
+                <?php else: ?>
+                <i class="<?= sanitize($c['icon']) ?>"></i>
+                <?php endif; ?>
+            </div>
             <div class="sortable-info">
                 <strong><?= sanitize($c['name']) ?></strong>
                 <span><?= sanitize(mb_strimwidth($c['description'], 0, 60, '...')) ?></span>
@@ -160,6 +221,34 @@ $popularIcons = ['fas fa-spray-can','fas fa-water','fas fa-hands-wash','fas fa-b
 </div>
 
 <script>
+// Image preview
+function previewCatImg(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const preview = document.getElementById('catImgPreview');
+            const text = document.getElementById('catImgText');
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+            if (text) text.style.display = 'none';
+            document.getElementById('catImgZone').classList.add('has-image');
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+// Drag & Drop on image zone
+const zone = document.getElementById('catImgZone');
+if (zone) {
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.style.borderColor = 'var(--secondary)'; });
+    zone.addEventListener('dragleave', () => { zone.style.borderColor = ''; });
+    zone.addEventListener('drop', e => {
+        e.preventDefault(); zone.style.borderColor = '';
+        const input = document.getElementById('catImgInput');
+        input.files = e.dataTransfer.files;
+        previewCatImg(input);
+    });
+}
+
 // Drag & Drop Reorder
 (function() {
     const container = document.getElementById('categoriesSortable');

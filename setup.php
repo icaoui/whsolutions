@@ -28,6 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try { $pdo->exec("ALTER TABLE admins ADD COLUMN is_active TINYINT(1) DEFAULT 1 AFTER role"); } catch(Exception $e) {}
     try { $pdo->exec("ALTER TABLE admins ADD COLUMN last_login DATETIME DEFAULT NULL AFTER is_active"); } catch(Exception $e) {}
 
+    // Add image column to categories if missing
+    try { $pdo->exec("ALTER TABLE categories ADD COLUMN image VARCHAR(255) DEFAULT NULL AFTER icon"); } catch(Exception $e) {}
+
     // Create activity log table
     try {
         $pdo->exec("CREATE TABLE IF NOT EXISTS admin_activity_log (

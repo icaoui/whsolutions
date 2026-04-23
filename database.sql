@@ -33,6 +33,7 @@ CREATE TABLE categories (
     slug VARCHAR(150) NOT NULL UNIQUE,
     description TEXT,
     icon VARCHAR(50) DEFAULT 'fas fa-box',
+    image VARCHAR(255) DEFAULT NULL,
     sort_order INT DEFAULT 0,
     is_active TINYINT(1) DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
