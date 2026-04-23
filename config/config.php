@@ -8,7 +8,6 @@ define('SITE_EMAIL2', 'contact.whsolution@gmail.com');
 define('SITE_PHONE', '+212 (0) 6 52 020702');
 define('SITE_ADDRESS', 'N°31, Rue Martir ABD Eslam Ben Mohammed - Residence Riad Zayton, Bureau N°2 Val fleury - Kenitra Maroc');
 define('WHATSAPP_NUMBER', '212652020702');
-define('WHATSAPP_LINK', 'https://wa.link/t3eheg');
 define('CATALOGUE_PDF', 'https://drive.google.com/file/d/149LV19xcNzt5apoNIbIQvo7vI5KIB4v6/view');
 
 // Database

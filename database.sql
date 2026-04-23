@@ -30,6 +30,7 @@ CREATE TABLE products (
     category_id INT,
     name VARCHAR(255) NOT NULL,
     slug VARCHAR(255) NOT NULL UNIQUE,
+    reference VARCHAR(100) DEFAULT NULL,
     description TEXT,
     short_description VARCHAR(500),
     image VARCHAR(255),

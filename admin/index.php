@@ -10,7 +10,7 @@ $totalInquiries = $pdo->query("SELECT COUNT(*) FROM inquiries")->fetchColumn();
 $totalVisitors = $pdo->query("SELECT COUNT(*) FROM visitors")->fetchColumn();
 $todayVisitors = $pdo->query("SELECT COUNT(*) FROM visitors WHERE DATE(visited_at) = CURDATE()")->fetchColumn();
 $unreadMessages = $pdo->query("SELECT COUNT(*) FROM messages WHERE is_read = 0")->fetchColumn();
-$pendingInquiries = $pdo->query("SELECT COUNT(*) FROM inquiries WHERE status = 'pending'")->fetchColumn();
+$pendingInquiries = $pdo->query("SELECT COUNT(*) FROM inquiries WHERE status = 'new'")->fetchColumn();
 
 // Visitors last 7 days
 $visitorsData = $pdo->query("SELECT DATE(visited_at) as day, COUNT(*) as count FROM visitors WHERE visited_at >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) GROUP BY DATE(visited_at) ORDER BY day")->fetchAll();
@@ -137,7 +137,7 @@ $recentInquiries = $pdo->query("SELECT i.*, p.name as product_name FROM inquirie
             <td><?= sanitize($inq['customer_name']) ?></td>
             <td><?= sanitize($inq['product_name'] ?? 'N/A') ?></td>
             <td><?= $inq['quantity'] ?></td>
-            <td><span class="badge badge-<?= $inq['status'] === 'pending' ? 'warning' : ($inq['status'] === 'responded' ? 'success' : 'secondary') ?>"><?= $inq['status'] ?></span></td>
+            <td><span class="badge badge-<?= $inq['status'] === 'new' ? 'warning' : ($inq['status'] === 'completed' ? 'success' : 'primary') ?>"><?= $inq['status'] === 'new' ? 'Nouveau' : ($inq['status'] === 'contacted' ? 'Contacté' : ($inq['status'] === 'completed' ? 'Terminé' : 'Annulé')) ?></span></td>
             <td><?= date('d/m H:i', strtotime($inq['created_at'])) ?></td>
         </tr>
         <?php endforeach; ?>

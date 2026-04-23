@@ -29,7 +29,8 @@ function getCategoryBySlug($pdo, $slug) {
 }
 
 function getProducts($pdo, $categoryId = null, $page = 1, $limit = 12, $search = null) {
-    $offset = ($page - 1) * $limit;
+    $limit = intval($limit);
+    $offset = (intval($page) - 1) * $limit;
     $params = [];
     $where = ["p.is_active = 1"];
     if ($categoryId) {
@@ -44,8 +45,10 @@ function getProducts($pdo, $categoryId = null, $page = 1, $limit = 12, $search =
     $whereStr = implode(' AND ', $where);
     $sql = "SELECT p.*, c.name as category_name, c.slug as category_slug 
             FROM products p LEFT JOIN categories c ON p.category_id = c.id 
-            WHERE $whereStr ORDER BY p.sort_order ASC, p.created_at DESC LIMIT $limit OFFSET $offset";
+            WHERE $whereStr ORDER BY p.sort_order ASC, p.created_at DESC LIMIT ? OFFSET ?";
     $stmt = $pdo->prepare($sql);
+    $params[] = $limit;
+    $params[] = $offset;
     $stmt->execute($params);
     return $stmt->fetchAll();
 }

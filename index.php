@@ -11,7 +11,7 @@ require_once 'includes/header.php';
 ?>
 
 <!-- Hero Section -->
-<section class="hero">
+<section class="hero" style="background-image: url('assets/images/hero-bg.png');">
     <div class="hero-particles"></div>
     <div class="container">
         <div class="hero-content">
@@ -98,8 +98,18 @@ require_once 'includes/header.php';
             <p>Découvrez notre gamme complète de produits d'hygiène professionnelle</p>
         </div>
         <div class="categories-grid" data-stagger>
-            <?php foreach($categories as $i => $cat): ?>
-            <a href="products.php?category=<?= $cat['slug'] ?>" class="category-card">
+            <?php 
+            $catImages = [
+                'nettoyage-desinfection' => 'cat-cleaning.png',
+                'traitement-eaux' => 'cat-water.jpg',
+                'hygiene-personnel' => 'cat-hygiene.png',
+                'materiel-nettoyage' => 'cat-material.png'
+            ];
+            foreach($categories as $i => $cat): 
+                $catImg = $catImages[$cat['slug']] ?? '';
+            ?>
+            <a href="products.php?category=<?= $cat['slug'] ?>" class="category-card<?= $catImg ? ' has-image' : '' ?>">
+                <?php if($catImg): ?><img src="assets/images/<?= $catImg ?>" alt="<?= sanitize($cat['name']) ?>" class="cat-bg-img"><?php endif; ?>
                 <div class="cat-icon"><i class="<?= $cat['icon'] ?>"></i></div>
                 <h3><?= sanitize($cat['name']) ?></h3>
                 <p><?= sanitize(mb_strimwidth($cat['description'], 0, 80, '...')) ?></p>
@@ -162,19 +172,19 @@ require_once 'includes/header.php';
         </div>
         <div class="engagement-grid" data-stagger>
             <div class="engagement-card">
-                <div class="eng-icon"><i class="fas fa-leaf"></i></div>
-                <h3>Éco-Responsable</h3>
-                <p>Solutions respectueuses de l'environnement avec des formulations biodégradables et des emballages recyclables.</p>
+                <img src="assets/images/icon-quality.png" alt="Qualité" class="eng-img">
+                <h3>Qualité et Performance</h3>
+                <p>Des produits et services testés pour garantir un niveau d'hygiène irréprochable.</p>
             </div>
             <div class="engagement-card">
-                <div class="eng-icon"><i class="fas fa-flask"></i></div>
-                <h3>Innovation</h3>
-                <p>Recherche et développement continus pour vous proposer les solutions les plus performantes du marché.</p>
+                <img src="assets/images/icon-environment.png" alt="Environnement" class="eng-img">
+                <h3>Respect de l'Environnement</h3>
+                <p>Solutions biodégradables et écoresponsables, pour une hygiène durable.</p>
             </div>
             <div class="engagement-card">
-                <div class="eng-icon"><i class="fas fa-handshake"></i></div>
-                <h3>Partenariat</h3>
-                <p>Accompagnement personnalisé et formation de vos équipes pour une utilisation optimale de nos produits.</p>
+                <img src="assets/images/icon-security.png" alt="Sécurité" class="eng-img">
+                <h3>Sécurité et Efficacité</h3>
+                <p>Des interventions conformes aux normes, sans compromis sur la performance.</p>
             </div>
         </div>
     </div>

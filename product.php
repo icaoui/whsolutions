@@ -84,7 +84,7 @@ require_once 'includes/header.php';
                     <?php endif; ?>
                 </div>
                 <div class="description">
-                    <?= nl2br(sanitize($product['description'])) ?>
+                    <?= nl2br(htmlspecialchars($product['description'], ENT_QUOTES, 'UTF-8')) ?>
                 </div>
 
                 <!-- Quantity & WhatsApp -->
@@ -96,7 +96,7 @@ require_once 'includes/header.php';
                         <button type="button" class="qty-btn qty-plus">+</button>
                     </div>
                 </div>
-                <a href="<?= getWhatsAppOrderLink($product) ?>" target="_blank" class="btn btn-whatsapp btn-whatsapp-order" data-product="<?= sanitize($product['name']) ?>" style="width:100%; justify-content:center; padding:16px; font-size:1.1rem;">
+                <a href="<?= getWhatsAppOrderLink($product) ?>" target="_blank" class="btn btn-whatsapp btn-whatsapp-order" data-product="<?= sanitize($product['name']) ?>" id="orderWhatsApp" onclick="return showOrderConfirm(event)" style="width:100%; justify-content:center; padding:16px; font-size:1.1rem;">
                     <i class="fab fa-whatsapp"></i> Commander via WhatsApp
                 </a>
 
@@ -160,11 +160,91 @@ require_once 'includes/header.php';
     </div>
 </section>
 
+<!-- Order Confirmation Modal -->
+<div class="order-modal-overlay" id="orderModal">
+    <div class="order-modal">
+        <button class="order-modal-close" onclick="closeOrderModal()">&times;</button>
+        <div class="order-modal-icon"><i class="fab fa-whatsapp"></i></div>
+        <h3>Confirmer votre commande</h3>
+        <div class="order-summary">
+            <div class="order-summary-row">
+                <span>Produit</span>
+                <strong id="modalProduct"><?= sanitize($product['name']) ?></strong>
+            </div>
+            <div class="order-summary-row">
+                <span>Catégorie</span>
+                <strong><?= sanitize($product['category_name']) ?></strong>
+            </div>
+            <div class="order-summary-row">
+                <span>Quantité</span>
+                <strong id="modalQty">1</strong>
+            </div>
+            <?php if(!empty($product['reference'])): ?>
+            <div class="order-summary-row">
+                <span>Référence</span>
+                <strong><?= sanitize($product['reference']) ?></strong>
+            </div>
+            <?php endif; ?>
+        </div>
+        <p class="order-modal-note"><i class="fas fa-info-circle"></i> Vous allez être redirigé vers WhatsApp pour finaliser votre commande avec notre équipe.</p>
+        <div class="order-modal-actions">
+            <button class="btn btn-outline" onclick="closeOrderModal()">Annuler</button>
+            <a href="#" id="confirmOrderBtn" target="_blank" class="btn btn-whatsapp" onclick="orderSent()">
+                <i class="fab fa-whatsapp"></i> Confirmer & Envoyer
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Order Sent Thank You Banner -->
+<div class="order-thankyou" id="orderThankyou" style="display:none;">
+    <div class="container">
+        <div class="thankyou-content">
+            <i class="fas fa-check-circle"></i>
+            <div>
+                <strong>Commande envoyée avec succès !</strong>
+                <p>Notre équipe vous répondra dans les plus brefs délais sur WhatsApp.</p>
+            </div>
+            <button onclick="this.parentElement.parentElement.parentElement.style.display='none'" class="thankyou-close">&times;</button>
+        </div>
+    </div>
+</div>
+
 <script>
 window.whConfig = {
     number: '<?= sanitize(getSetting($pdo, "whatsapp_number", WHATSAPP_NUMBER)) ?>',
     orderMsg: <?= json_encode(getSetting($pdo, 'whatsapp_order_message', 'Bonjour, je souhaite commander le produit : *{product}* (Quantité: {quantity})'), JSON_UNESCAPED_UNICODE) ?>
 };
+
+function showOrderConfirm(e) {
+    e.preventDefault();
+    const qty = document.querySelector('.qty-input')?.value || 1;
+    document.getElementById('modalQty').textContent = qty;
+    const btn = document.getElementById('orderWhatsApp');
+    document.getElementById('confirmOrderBtn').href = btn.href;
+    document.getElementById('orderModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    return false;
+}
+function closeOrderModal() {
+    document.getElementById('orderModal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+function orderSent() {
+    closeOrderModal();
+    sessionStorage.setItem('orderSent', '1');
+    setTimeout(() => {
+        document.getElementById('orderThankyou').style.display = 'block';
+        document.getElementById('orderThankyou').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 500);
+}
+document.getElementById('orderModal').addEventListener('click', function(e) {
+    if (e.target === this) closeOrderModal();
+});
+if (sessionStorage.getItem('orderSent')) {
+    sessionStorage.removeItem('orderSent');
+    document.getElementById('orderThankyou').style.display = 'block';
+}
 </script>
 
 <?php require_once 'includes/footer.php'; ?>

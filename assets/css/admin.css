@@ -130,6 +130,44 @@ a { text-decoration:none; color:inherit; }
 .quick-action-btn:hover { border-color:var(--secondary); color:var(--secondary); transform:translateY(-2px); box-shadow:var(--shadow); }
 .quick-action-btn i { font-size:1rem; }
 
+/* SORTABLE ITEMS */
+.sortable-item { display:flex; align-items:center; gap:14px; padding:14px 18px; background:var(--white); border:2px solid var(--gray-200); border-radius:12px; margin-bottom:10px; transition:all 0.2s ease; }
+.sortable-item:hover { border-color:rgba(78,205,196,0.3); box-shadow:0 4px 15px rgba(0,0,0,0.06); }
+.sortable-item.dragging { opacity:0.5; border-color:var(--secondary); background:rgba(78,205,196,0.04); border-style:dashed; }
+.sortable-handle { cursor:grab; color:var(--gray-400); font-size:1rem; padding:4px; transition:color 0.2s; }
+.sortable-handle:hover { color:var(--secondary); }
+.sortable-handle:active { cursor:grabbing; }
+.sortable-icon { width:45px; height:45px; background:linear-gradient(135deg, var(--secondary), #00F5D4); border-radius:12px; display:flex; align-items:center; justify-content:center; color:var(--white); font-size:1.1rem; flex-shrink:0; }
+.sortable-info { flex:1; min-width:0; }
+.sortable-info strong { display:block; font-size:0.92rem; color:var(--primary); }
+.sortable-info span { font-size:0.8rem; color:var(--gray-500); display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.sortable-meta { display:flex; align-items:center; gap:12px; }
+.sortable-actions { display:flex; gap:6px; }
+
+/* TOGGLE SWITCH */
+.toggle-switch { width:40px; height:22px; background:var(--gray-300); border-radius:11px; cursor:pointer; position:relative; transition:background 0.3s ease; display:inline-block; text-decoration:none; }
+.toggle-switch.active { background:var(--secondary); }
+.toggle-slider { position:absolute; top:2px; left:2px; width:18px; height:18px; background:var(--white); border-radius:50%; transition:transform 0.3s ease; box-shadow:0 1px 3px rgba(0,0,0,0.2); }
+.toggle-switch.active .toggle-slider { transform:translateX(18px); }
+
+/* ICON PICKER */
+.icon-pick-btn { width:36px; height:36px; border:2px solid var(--gray-200); border-radius:8px; background:var(--white); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:0.9rem; color:var(--gray-600); transition:all 0.2s ease; }
+.icon-pick-btn:hover { border-color:var(--secondary); color:var(--secondary); background:rgba(78,205,196,0.06); transform:scale(1.1); }
+
+/* IMAGE PREVIEW */
+.image-preview-zone { border:2px dashed var(--gray-300); border-radius:12px; padding:25px; text-align:center; cursor:pointer; transition:all 0.3s ease; background:var(--gray-50); }
+.image-preview-zone:hover { border-color:var(--secondary); background:rgba(78,205,196,0.03); }
+.image-preview-zone.has-image { border-style:solid; border-color:var(--secondary); }
+.image-preview-zone img { max-height:120px; max-width:100%; border-radius:8px; margin-top:10px; }
+.image-preview-zone .preview-text { color:var(--gray-500); font-size:0.85rem; }
+.image-preview-zone .preview-text i { font-size:1.8rem; display:block; margin-bottom:8px; color:var(--gray-400); }
+
+/* SEARCH BAR ADMIN */
+.admin-search { position:relative; margin-bottom:15px; }
+.admin-search input { width:100%; padding:10px 14px 10px 40px; border:2px solid var(--gray-200); border-radius:10px; font-family:var(--font); font-size:0.9rem; transition:var(--transition); }
+.admin-search input:focus { border-color:var(--secondary); outline:none; box-shadow:0 0 0 3px rgba(78,205,196,0.15); }
+.admin-search i { position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--gray-400); }
+
 /* RESPONSIVE */
 @media (max-width:992px) {
     .sidebar { transform:translateX(-100%); }
@@ -154,6 +192,10 @@ a { text-decoration:none; color:inherit; }
     .btn-admin { padding:8px 16px; font-size:0.82rem; }
     .login-card { padding:25px; }
     .login-container { padding:15px; }
+    .stats-row { grid-template-columns:repeat(2,1fr) !important; }
+    .sortable-item { flex-wrap:wrap; }
+    .sortable-info { min-width:120px; }
+    .sortable-meta { width:100%; justify-content:flex-start; padding-left:60px; }
 }
 @media (max-width:480px) {
     .admin-content { padding:10px; }
