@@ -190,6 +190,97 @@ require_once 'includes/header.php';
     </div>
 </section>
 
+<!-- Testimonials Carousel -->
+<section class="section" style="background:var(--white);">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Témoignages</span>
+            <h2>Ce Que Disent Nos Clients</h2>
+            <p>La satisfaction de nos partenaires est notre meilleure récompense</p>
+        </div>
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="text-center px-4 py-5" style="background:var(--gray-100); border-radius:var(--radius-lg); position:relative;">
+                                <i class="fas fa-quote-left" style="font-size:2.5rem; color:var(--secondary); opacity:0.3; position:absolute; top:20px; left:30px;"></i>
+                                <div class="mb-3">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                </div>
+                                <p class="fs-5 fst-italic mb-4" style="color:var(--gray-700); line-height:1.8;">"WH Solutions nous fournit des produits d'hygiène de qualité exceptionnelle. Leur service client est réactif et leurs livraisons toujours à temps. Un partenaire de confiance."</p>
+                                <div class="d-flex align-items-center justify-content-center gap-3">
+                                    <div class="rounded-circle d-flex align-items-center justify-content-center" style="width:50px;height:50px;background:linear-gradient(135deg,var(--secondary),var(--neon));color:#fff;font-weight:700;">AK</div>
+                                    <div class="text-start">
+                                        <strong style="color:var(--primary);">Ahmed K.</strong>
+                                        <div style="font-size:0.82rem; color:var(--gray-500);">Directeur Qualité — Industrie Agroalimentaire</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="text-center px-4 py-5" style="background:var(--gray-100); border-radius:var(--radius-lg); position:relative;">
+                                <i class="fas fa-quote-left" style="font-size:2.5rem; color:var(--secondary); opacity:0.3; position:absolute; top:20px; left:30px;"></i>
+                                <div class="mb-3">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                </div>
+                                <p class="fs-5 fst-italic mb-4" style="color:var(--gray-700); line-height:1.8;">"Depuis que nous travaillons avec WH Solutions, notre conformité HACCP s'est nettement améliorée. Des produits performants et un accompagnement technique remarquable."</p>
+                                <div class="d-flex align-items-center justify-content-center gap-3">
+                                    <div class="rounded-circle d-flex align-items-center justify-content-center" style="width:50px;height:50px;background:linear-gradient(135deg,var(--purple),var(--secondary));color:#fff;font-weight:700;">SM</div>
+                                    <div class="text-start">
+                                        <strong style="color:var(--primary);">Sara M.</strong>
+                                        <div style="font-size:0.82rem; color:var(--gray-500);">Responsable Hygiène — Hôtellerie</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="text-center px-4 py-5" style="background:var(--gray-100); border-radius:var(--radius-lg); position:relative;">
+                                <i class="fas fa-quote-left" style="font-size:2.5rem; color:var(--secondary); opacity:0.3; position:absolute; top:20px; left:30px;"></i>
+                                <div class="mb-3">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star-half-alt text-warning"></i>
+                                </div>
+                                <p class="fs-5 fst-italic mb-4" style="color:var(--gray-700); line-height:1.8;">"Commande simple via WhatsApp, livraison rapide et produits de qualité. WH Solutions comprend les besoins des professionnels. Je recommande vivement."</p>
+                                <div class="d-flex align-items-center justify-content-center gap-3">
+                                    <div class="rounded-circle d-flex align-items-center justify-content-center" style="width:50px;height:50px;background:linear-gradient(135deg,var(--gold),#FFB800);color:#5D4600;font-weight:700;">YB</div>
+                                    <div class="text-start">
+                                        <strong style="color:var(--primary);">Youssef B.</strong>
+                                        <div style="font-size:0.82rem; color:var(--gray-500);">Gérant — Restaurant & Traiteur</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center gap-2 mt-4">
+                <button class="btn btn-sm rounded-circle" data-bs-target="#testimonialCarousel" data-bs-slide="prev" style="width:40px;height:40px;background:var(--primary);color:#fff;border:none;"><i class="fas fa-chevron-left"></i></button>
+                <button class="btn btn-sm rounded-circle" data-bs-target="#testimonialCarousel" data-bs-slide="next" style="width:40px;height:40px;background:var(--secondary);color:#fff;border:none;"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Catalogue Download -->
 <section class="section catalogue-download-section">
     <div class="container">

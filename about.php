@@ -103,6 +103,83 @@ require_once 'includes/header.php';
     </div>
 </section>
 
+<!-- FAQ Section -->
+<section class="section" style="background:var(--gray-100);">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">FAQ</span>
+            <h2>Questions Fréquentes</h2>
+            <p>Retrouvez les réponses aux questions les plus posées par nos clients</p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item border-0 mb-3" style="border-radius:var(--radius) !important; overflow:hidden; box-shadow:var(--shadow);">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" style="font-family:var(--font); color:var(--primary);">
+                                <i class="fas fa-truck me-3" style="color:var(--secondary);"></i> Quels sont vos délais de livraison ?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body" style="color:var(--gray-600);">
+                                Nous livrons sur tout le territoire marocain. Les délais varient de 24h à 72h selon votre localisation. Les commandes passées avant 14h à Kenitra sont livrées le jour même. Pour les grandes quantités, nous organisons des livraisons sur mesure.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border-0 mb-3" style="border-radius:var(--radius) !important; overflow:hidden; box-shadow:var(--shadow);">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" style="font-family:var(--font); color:var(--primary);">
+                                <i class="fas fa-shopping-cart me-3" style="color:var(--secondary);"></i> Comment passer une commande ?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body" style="color:var(--gray-600);">
+                                Le moyen le plus rapide est via <strong>WhatsApp</strong>. Parcourez notre catalogue, choisissez vos produits et envoyez-nous votre commande directement. Vous pouvez aussi nous contacter par téléphone ou email. Nous confirmons votre commande sous 1h pendant les heures ouvrables.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border-0 mb-3" style="border-radius:var(--radius) !important; overflow:hidden; box-shadow:var(--shadow);">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" style="font-family:var(--font); color:var(--primary);">
+                                <i class="fas fa-certificate me-3" style="color:var(--secondary);"></i> Vos produits sont-ils certifiés HACCP ?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body" style="color:var(--gray-600);">
+                                Oui, l'ensemble de nos produits sont conformes aux normes HACCP et aux réglementations en vigueur au Maroc et à l'international. Nous fournissons les fiches techniques et certificats de conformité sur demande.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border-0 mb-3" style="border-radius:var(--radius) !important; overflow:hidden; box-shadow:var(--shadow);">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" style="font-family:var(--font); color:var(--primary);">
+                                <i class="fas fa-box-open me-3" style="color:var(--secondary);"></i> Proposez-vous des échantillons ?
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body" style="color:var(--gray-600);">
+                                Oui, pour les professionnels et les commandes importantes, nous pouvons fournir des échantillons gratuits de nos produits. Contactez-nous via WhatsApp ou email en précisant les produits souhaités et votre secteur d'activité.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border-0 mb-3" style="border-radius:var(--radius) !important; overflow:hidden; box-shadow:var(--shadow);">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" style="font-family:var(--font); color:var(--primary);">
+                                <i class="fas fa-credit-card me-3" style="color:var(--secondary);"></i> Quels sont vos modes de paiement ?
+                            </button>
+                        </h2>
+                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body" style="color:var(--gray-600);">
+                                Nous acceptons le paiement à la livraison, le virement bancaire et le chèque. Pour les clients réguliers, nous proposons des facilités de paiement adaptées. Les conditions sont discutées lors de votre première commande.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-section">
     <div class="container">

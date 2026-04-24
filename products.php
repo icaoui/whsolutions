@@ -52,21 +52,28 @@ require_once 'includes/header.php';
         </form>
 
         <!-- Category Filter -->
-        <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:40px;">
-            <a href="products.php" class="btn <?= !$categorySlug ? 'btn-primary' : 'btn-outline' ?>" style="padding:8px 20px; font-size:0.85rem;">Tous</a>
+        <div class="d-flex flex-wrap gap-2 justify-content-center mb-4">
+            <a href="products.php" class="btn btn-sm <?= !$categorySlug ? 'text-white' : '' ?> fw-semibold" style="padding:8px 22px; border-radius:50px; <?= !$categorySlug ? 'background:linear-gradient(135deg,var(--primary),var(--secondary)); border:none;' : 'border:2px solid var(--gray-200); color:var(--gray-700);' ?>">
+                <i class="fas fa-th-large me-1"></i> Tous
+                <span class="badge bg-white text-dark ms-1"><?= $totalProducts ?></span>
+            </a>
             <?php foreach($categories as $cat): ?>
-            <a href="products.php?category=<?= $cat['slug'] ?>" class="btn <?= $categorySlug === $cat['slug'] ? 'btn-primary' : 'btn-outline' ?>" style="padding:8px 20px; font-size:0.85rem;">
-                <?= sanitize($cat['name']) ?>
+            <a href="products.php?category=<?= $cat['slug'] ?>" class="btn btn-sm <?= $categorySlug === $cat['slug'] ? 'text-white' : '' ?> fw-semibold" style="padding:8px 22px; border-radius:50px; <?= $categorySlug === $cat['slug'] ? 'background:linear-gradient(135deg,var(--primary),var(--secondary)); border:none;' : 'border:2px solid var(--gray-200); color:var(--gray-700);' ?>">
+                <i class="<?= $cat['icon'] ?> me-1"></i> <?= sanitize($cat['name']) ?>
             </a>
             <?php endforeach; ?>
         </div>
 
         <?php if(empty($products)): ?>
-        <div style="text-align:center; padding:60px 0;">
-            <i class="fas fa-box-open" style="font-size:4rem; color:var(--gray-400); margin-bottom:20px;"></i>
-            <h3 style="color:var(--gray-600);">Aucun produit trouvé</h3>
-            <p style="color:var(--gray-500);">Essayez une autre recherche ou catégorie</p>
-            <a href="products.php" class="btn btn-primary" style="margin-top:20px;">Voir tous les produits</a>
+        <div class="text-center py-5">
+            <div class="mb-4" style="width:120px;height:120px;margin:0 auto;background:var(--gray-100);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+                <i class="fas fa-search" style="font-size:3rem; color:var(--gray-400);"></i>
+            </div>
+            <h3 class="fw-bold" style="color:var(--primary);">Aucun produit trouvé</h3>
+            <p style="color:var(--gray-500); max-width:400px; margin:10px auto 25px;">Essayez une autre recherche ou sélectionnez une catégorie différente</p>
+            <a href="products.php" class="btn btn-primary" style="background:linear-gradient(135deg,var(--primary),var(--secondary)); border:none; padding:12px 30px; border-radius:50px;">
+                <i class="fas fa-th-large me-2"></i> Voir tous les produits
+            </a>
         </div>
         <?php else: ?>
         <p style="text-align:center; color:var(--gray-500); margin-bottom:30px;"><?= $totalProducts ?> produit(s) trouvé(s)</p>
