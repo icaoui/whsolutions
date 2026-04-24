@@ -24,7 +24,7 @@ if (isset($_GET['status']) && isset($_GET['id'])) {
             $d = $dur->fetch();
             if ($d) {
                 $updates[] = "expires_at = DATE_ADD(NOW(), INTERVAL ? MONTH)";
-                $params[] = $d['duration_months'];
+                $params[] = $d['duration_months'] ?? 12;
             }
         }
         $params[] = $id;

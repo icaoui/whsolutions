@@ -31,6 +31,11 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
+    <url>
+        <loc><?= SITE_URL ?>/packages.php</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
     <?php foreach(getCategories($pdo) as $cat): ?>
     <url>
         <loc><?= SITE_URL ?>/products.php?category=<?= $cat['slug'] ?></loc>

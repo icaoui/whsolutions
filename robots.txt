@@ -4,5 +4,6 @@ Disallow: /admin/
 Disallow: /config/
 Disallow: /includes/
 Disallow: /uploads/
+Disallow: /setup.php
 
 Sitemap: http://localhost/whsolutions/sitemap.php

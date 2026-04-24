@@ -19,6 +19,7 @@
                 <ul>
                     <li><a href="<?= SITE_URL ?>/">Accueil</a></li>
                     <li><a href="<?= SITE_URL ?>/products.php">Nos Produits</a></li>
+                    <li><a href="<?= SITE_URL ?>/packages.php">Nos Packages</a></li>
                     <li><a href="<?= CATALOGUE_PDF ?>" target="_blank">Catalogue PDF</a></li>
                     <li><a href="<?= SITE_URL ?>/about.php">À Propos</a></li>
                     <li><a href="<?= SITE_URL ?>/contact.php">Contact</a></li>

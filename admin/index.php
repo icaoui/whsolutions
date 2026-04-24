@@ -12,6 +12,16 @@ $todayVisitors = $pdo->query("SELECT COUNT(*) FROM visitors WHERE DATE(visited_a
 $unreadMessages = $pdo->query("SELECT COUNT(*) FROM messages WHERE is_read = 0")->fetchColumn();
 $pendingInquiries = $pdo->query("SELECT COUNT(*) FROM inquiries WHERE status = 'new'")->fetchColumn();
 
+// Packages stats (safe check if table exists)
+$totalPackages = 0;
+$activeSubscriptions = 0;
+$totalReports = 0;
+try {
+    $totalPackages = $pdo->query("SELECT COUNT(*) FROM packages")->fetchColumn();
+    $activeSubscriptions = $pdo->query("SELECT COUNT(*) FROM customer_packages WHERE status = 'active'")->fetchColumn();
+    $totalReports = $pdo->query("SELECT COUNT(*) FROM reports")->fetchColumn();
+} catch(Exception $e) {}
+
 // Visitors last 7 days
 $visitorsData = $pdo->query("SELECT DATE(visited_at) as day, COUNT(*) as count FROM visitors WHERE visited_at >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) GROUP BY DATE(visited_at) ORDER BY day")->fetchAll();
 $vLabels = array_map(fn($v) => date('d/m', strtotime($v['day'])), $visitorsData);
@@ -83,6 +93,32 @@ $recentInquiries = $pdo->query("SELECT i.*, p.name as product_name FROM inquirie
         </div>
     </div>
 </div>
+
+<?php if($totalPackages > 0 || $activeSubscriptions > 0 || $totalReports > 0): ?>
+<div class="stats-grid" style="margin-top:15px;">
+    <div class="stat-card" style="background:linear-gradient(135deg,#8e44ad,#9b59b6); color:#fff;">
+        <div class="stat-icon" style="background:rgba(255,255,255,0.2);"><i class="fas fa-gem"></i></div>
+        <div class="stat-info">
+            <span class="stat-number"><?= $totalPackages ?></span>
+            <span class="stat-label">Packages</span>
+        </div>
+    </div>
+    <div class="stat-card" style="background:linear-gradient(135deg,#27ae60,#2ecc71); color:#fff;">
+        <div class="stat-icon" style="background:rgba(255,255,255,0.2);"><i class="fas fa-user-check"></i></div>
+        <div class="stat-info">
+            <span class="stat-number"><?= $activeSubscriptions ?></span>
+            <span class="stat-label">Abonnements Actifs</span>
+        </div>
+    </div>
+    <div class="stat-card" style="background:linear-gradient(135deg,#e67e22,#f39c12); color:#fff;">
+        <div class="stat-icon" style="background:rgba(255,255,255,0.2);"><i class="fas fa-file-alt"></i></div>
+        <div class="stat-info">
+            <span class="stat-number"><?= $totalReports ?></span>
+            <span class="stat-label">Rapports</span>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
 
 <!-- Charts -->
 <div class="charts-grid">

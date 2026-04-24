@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['request_package'])) {
                     <?php endif; ?>
 
                     <div class="package-action">
-                        <button type="button" class="btn-package <?= $isPopular ? 'btn-package-primary' : '' ?>" style="--pkg-color:<?= sanitize($color) ?>;" onclick="openPackageModal(<?= $pkg['id'] ?>, '<?= addslashes(sanitize($pkg['name'])) ?>')">
+                        <button type="button" class="btn-package <?= $isPopular ? 'btn-package-primary' : '' ?>" style="--pkg-color:<?= sanitize($color) ?>;" onclick="openPackageModal(<?= $pkg['id'] ?>, <?= htmlspecialchars(json_encode($pkg['name']), ENT_QUOTES) ?>)">
                             <i class="fas fa-paper-plane"></i> Demander ce package
                         </button>
                     </div>
@@ -231,14 +231,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['request_package'])) {
                             <label class="form-label fw-semibold">Nom complet *</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                <input type="text" name="client_name" class="form-control" required placeholder="Votre nom">
+                                <input type="text" name="client_name" class="form-control" required placeholder="Votre nom" maxlength="150">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label fw-semibold">Téléphone *</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                                <input type="text" name="client_phone" class="form-control" required placeholder="+212...">
+                                <input type="tel" name="client_phone" class="form-control" required placeholder="+212..." pattern="[+0-9]{10,15}">
                             </div>
                         </div>
                         <div class="col-md-6">

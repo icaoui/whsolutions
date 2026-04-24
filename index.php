@@ -1,5 +1,5 @@
 <?php
-$pageTitle = 'WH Solutions - Expert en Hygiène Professionnelle au Maroc | Nettoyage & Désinfection';
+$pageTitle = 'WH Solutions - Expert en hygiène professionnelle au Maroc | Nettoyage & Désinfection';
 $pageDescription = 'WH Solutions, votre expert en hygiène professionnelle au Maroc. Produits de nettoyage, désinfection, traitement des eaux conformes HACCP. Livraison partout au Maroc.';
 $pageKeywords = 'hygiène professionnelle Maroc, produits nettoyage industriel, désinfection HACCP, WH Solutions Kenitra, produits hygiène agroalimentaire';
 require_once 'config/config.php';
