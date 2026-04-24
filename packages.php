@@ -1,4 +1,8 @@
 <?php
+// Packages page hidden from visitors
+header('Location: index.php');
+exit;
+
 $pageTitle = 'Nos Packages - ' . SITE_NAME;
 $pageDescription = 'Découvrez nos propositions de valeur et packages d\'hygiène professionnelle adaptés à votre activité.';
 require_once 'includes/header.php';
