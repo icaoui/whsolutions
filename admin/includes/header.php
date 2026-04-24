@@ -51,6 +51,7 @@ $adminPage = basename($_SERVER['PHP_SELF'], '.php');
             <a href="customer_packages.php" class="nav-item <?= $adminPage === 'customer_packages' ? 'active' : '' ?>"><i class="fas fa-user-tag"></i><span>Clients Packages</span></a>
             <div class="nav-divider"></div>
             <a href="visitors.php" class="nav-item <?= $adminPage === 'visitors' ? 'active' : '' ?>"><i class="fas fa-users"></i><span>Visiteurs</span></a>
+            <a href="reports.php" class="nav-item <?= $adminPage === 'reports' ? 'active' : '' ?>"><i class="fas fa-file-alt"></i><span>Rapports</span></a>
             <a href="settings.php" class="nav-item <?= $adminPage === 'settings' ? 'active' : '' ?>"><i class="fas fa-cog"></i><span>Paramètres</span></a>
             <?php if(isSuperAdmin()): ?>
             <div class="nav-divider"></div>

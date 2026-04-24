@@ -98,6 +98,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ) ENGINE=InnoDB");
     } catch(Exception $e) {}
 
+    // Create reports table
+    try {
+        $pdo->exec("CREATE TABLE IF NOT EXISTS reports (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            title VARCHAR(300) NOT NULL,
+            content TEXT NOT NULL,
+            category VARCHAR(50) DEFAULT 'general',
+            author VARCHAR(100),
+            admin_id INT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            FOREIGN KEY (admin_id) REFERENCES admins(id) ON DELETE SET NULL
+        ) ENGINE=InnoDB");
+    } catch(Exception $e) {}
+
     $done = true;
 }
 ?>

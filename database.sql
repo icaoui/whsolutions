@@ -142,6 +142,19 @@ CREATE TABLE customer_packages (
     FOREIGN KEY (package_id) REFERENCES packages(id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
+-- Reports
+CREATE TABLE reports (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(300) NOT NULL,
+    content TEXT NOT NULL,
+    category VARCHAR(50) DEFAULT 'general',
+    author VARCHAR(100),
+    admin_id INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (admin_id) REFERENCES admins(id) ON DELETE SET NULL
+) ENGINE=InnoDB;
+
 -- Visitors Analytics
 CREATE TABLE visitors (
     id INT AUTO_INCREMENT PRIMARY KEY,

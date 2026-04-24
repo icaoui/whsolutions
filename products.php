@@ -77,28 +77,30 @@ require_once 'includes/header.php';
         </div>
         <?php else: ?>
         <p style="text-align:center; color:var(--gray-500); margin-bottom:30px;"><?= $totalProducts ?> produit(s) trouvé(s)</p>
-        <div class="products-grid" data-stagger>
+        <div class="row g-4" data-stagger>
             <?php foreach($products as $prod): ?>
-            <div class="product-card">
-                <div class="product-image">
-                    <?php if(!empty($prod['image'])): ?>
-                    <img src="<?= SITE_URL ?>/uploads/products/<?= $prod['image'] ?>" alt="<?= sanitize($prod['name']) ?>">
-                    <?php else: ?>
-                    <i class="fas fa-box-open placeholder-icon"></i>
-                    <?php endif; ?>
-                    <?php if($prod['is_featured']): ?>
-                    <span class="product-badge">Populaire</span>
-                    <?php endif; ?>
-                </div>
-                <div class="product-info">
-                    <span class="product-category"><?= sanitize($prod['category_name']) ?></span>
-                    <h3 class="product-name"><?= sanitize($prod['name']) ?></h3>
-                    <p class="product-desc"><?= sanitize($prod['short_description'] ?? '') ?></p>
-                    <div class="product-actions">
-                        <a href="product.php?slug=<?= $prod['slug'] ?>" class="btn btn-outline">Détails</a>
-                        <a href="<?= getWhatsAppOrderLink($prod) ?>" target="_blank" class="btn btn-whatsapp">
-                            <i class="fab fa-whatsapp"></i> Commander
-                        </a>
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card h-100">
+                    <div class="product-image">
+                        <?php if(!empty($prod['image'])): ?>
+                        <img src="<?= SITE_URL ?>/uploads/products/<?= $prod['image'] ?>" alt="<?= sanitize($prod['name']) ?>">
+                        <?php else: ?>
+                        <i class="fas fa-box-open placeholder-icon"></i>
+                        <?php endif; ?>
+                        <?php if($prod['is_featured']): ?>
+                        <span class="product-badge">Populaire</span>
+                        <?php endif; ?>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category"><?= sanitize($prod['category_name']) ?></span>
+                        <h3 class="product-name"><?= sanitize($prod['name']) ?></h3>
+                        <p class="product-desc"><?= sanitize($prod['short_description'] ?? '') ?></p>
+                        <div class="product-actions">
+                            <a href="product.php?slug=<?= $prod['slug'] ?>" class="btn btn-outline">Détails</a>
+                            <a href="<?= getWhatsAppOrderLink($prod) ?>" target="_blank" class="btn btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i> Commander
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

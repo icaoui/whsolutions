@@ -69,21 +69,27 @@ require_once 'includes/header.php';
 <!-- Features -->
 <section class="section features">
     <div class="container">
-        <div class="features-grid" data-stagger>
-            <div class="feature-card">
-                <div class="icon"><i class="fas fa-shield-alt"></i></div>
-                <h3>Qualité Certifiée</h3>
-                <p>Produits conformes aux normes internationales HACCP et aux standards d'hygiène les plus stricts.</p>
+        <div class="row g-4" data-stagger>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card text-center p-4">
+                    <div class="icon mb-3"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Qualité Certifiée</h3>
+                    <p>Produits conformes aux normes internationales HACCP et aux standards d'hygiène les plus stricts.</p>
+                </div>
             </div>
-            <div class="feature-card">
-                <div class="icon"><i class="fas fa-truck-fast"></i></div>
-                <h3>Livraison Rapide</h3>
-                <p>Service de livraison sur tout le Maroc avec un suivi de commande en temps réel.</p>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card text-center p-4">
+                    <div class="icon mb-3"><i class="fas fa-truck-fast"></i></div>
+                    <h3>Livraison Rapide</h3>
+                    <p>Service de livraison sur tout le Maroc avec un suivi de commande en temps réel.</p>
+                </div>
             </div>
-            <div class="feature-card">
-                <div class="icon"><i class="fas fa-headset"></i></div>
-                <h3>Support Expert</h3>
-                <p>Équipe technique à votre écoute pour vous conseiller et accompagner vos projets.</p>
+            <div class="col-lg-4 col-md-12">
+                <div class="feature-card text-center p-4">
+                    <div class="icon mb-3"><i class="fas fa-headset"></i></div>
+                    <h3>Support Expert</h3>
+                    <p>Équipe technique à votre écoute pour vous conseiller et accompagner vos projets.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -97,7 +103,7 @@ require_once 'includes/header.php';
             <h2>Nos Catégories</h2>
             <p>Découvrez notre gamme complète de produits d'hygiène professionnelle</p>
         </div>
-        <div class="categories-grid" data-stagger>
+        <div class="row g-4" data-stagger>
             <?php 
             $catImages = [
                 'nettoyage-desinfection' => 'cat-cleaning.png',
@@ -108,12 +114,14 @@ require_once 'includes/header.php';
             foreach($categories as $i => $cat): 
                 $catImg = $catImages[$cat['slug']] ?? '';
             ?>
-            <a href="products.php?category=<?= $cat['slug'] ?>" class="category-card<?= $catImg ? ' has-image' : '' ?>">
-                <?php if($catImg): ?><img src="assets/images/<?= $catImg ?>" alt="<?= sanitize($cat['name']) ?>" class="cat-bg-img"><?php endif; ?>
-                <div class="cat-icon"><i class="<?= $cat['icon'] ?>"></i></div>
-                <h3><?= sanitize($cat['name']) ?></h3>
-                <p><?= sanitize(mb_strimwidth($cat['description'], 0, 80, '...')) ?></p>
-            </a>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <a href="products.php?category=<?= $cat['slug'] ?>" class="category-card<?= $catImg ? ' has-image' : '' ?> d-block h-100">
+                    <?php if($catImg): ?><img src="assets/images/<?= $catImg ?>" alt="<?= sanitize($cat['name']) ?>" class="cat-bg-img"><?php endif; ?>
+                    <div class="cat-icon"><i class="<?= $cat['icon'] ?>"></i></div>
+                    <h3><?= sanitize($cat['name']) ?></h3>
+                    <p><?= sanitize(mb_strimwidth($cat['description'], 0, 80, '...')) ?></p>
+                </a>
+            </div>
             <?php endforeach; ?>
         </div>
     </div>
@@ -129,28 +137,30 @@ require_once 'includes/header.php';
             <h2>Produits Phares</h2>
             <p>Les produits les plus demandés par nos clients professionnels</p>
         </div>
-        <div class="products-grid" data-stagger>
+        <div class="row g-4" data-stagger>
             <?php foreach($featured as $prod): ?>
-            <div class="product-card">
-                <div class="product-image">
-                    <?php if(!empty($prod['image'])): ?>
-                    <img src="<?= SITE_URL ?>/uploads/products/<?= $prod['image'] ?>" alt="<?= sanitize($prod['name']) ?>">
-                    <?php else: ?>
-                    <i class="fas fa-box-open placeholder-icon"></i>
-                    <?php endif; ?>
-                    <?php if($prod['is_featured']): ?>
-                    <span class="product-badge">Populaire</span>
-                    <?php endif; ?>
-                </div>
-                <div class="product-info">
-                    <span class="product-category"><?= sanitize($prod['category_name']) ?></span>
-                    <h3 class="product-name"><?= sanitize($prod['name']) ?></h3>
-                    <p class="product-desc"><?= sanitize($prod['short_description'] ?? '') ?></p>
-                    <div class="product-actions">
-                        <a href="product.php?slug=<?= $prod['slug'] ?>" class="btn btn-outline">Détails</a>
-                        <a href="<?= getWhatsAppOrderLink($prod) ?>" target="_blank" class="btn btn-whatsapp">
-                            <i class="fab fa-whatsapp"></i> Commander
-                        </a>
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="product-card h-100">
+                    <div class="product-image">
+                        <?php if(!empty($prod['image'])): ?>
+                        <img src="<?= SITE_URL ?>/uploads/products/<?= $prod['image'] ?>" alt="<?= sanitize($prod['name']) ?>">
+                        <?php else: ?>
+                        <i class="fas fa-box-open placeholder-icon"></i>
+                        <?php endif; ?>
+                        <?php if($prod['is_featured']): ?>
+                        <span class="product-badge">Populaire</span>
+                        <?php endif; ?>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category"><?= sanitize($prod['category_name']) ?></span>
+                        <h3 class="product-name"><?= sanitize($prod['name']) ?></h3>
+                        <p class="product-desc"><?= sanitize($prod['short_description'] ?? '') ?></p>
+                        <div class="product-actions">
+                            <a href="product.php?slug=<?= $prod['slug'] ?>" class="btn btn-outline">Détails</a>
+                            <a href="<?= getWhatsAppOrderLink($prod) ?>" target="_blank" class="btn btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i> Commander
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -170,21 +180,27 @@ require_once 'includes/header.php';
             <h2>Nos Engagements</h2>
             <p>Des valeurs fortes au service de votre satisfaction</p>
         </div>
-        <div class="engagement-grid" data-stagger>
-            <div class="engagement-card">
-                <img src="assets/images/icon-quality.png" alt="Qualité" class="eng-img">
-                <h3>Qualité et Performance</h3>
-                <p>Des produits et services testés pour garantir un niveau d'hygiène irréprochable.</p>
+        <div class="row g-4" data-stagger>
+            <div class="col-lg-4 col-md-6">
+                <div class="engagement-card text-center h-100">
+                    <img src="assets/images/icon-quality.png" alt="Qualité" class="eng-img">
+                    <h3>Qualité et Performance</h3>
+                    <p>Des produits et services testés pour garantir un niveau d'hygiène irréprochable.</p>
+                </div>
             </div>
-            <div class="engagement-card">
-                <img src="assets/images/icon-environment.png" alt="Environnement" class="eng-img">
-                <h3>Respect de l'Environnement</h3>
-                <p>Solutions biodégradables et écoresponsables, pour une hygiène durable.</p>
+            <div class="col-lg-4 col-md-6">
+                <div class="engagement-card text-center h-100">
+                    <img src="assets/images/icon-environment.png" alt="Environnement" class="eng-img">
+                    <h3>Respect de l'Environnement</h3>
+                    <p>Solutions biodégradables et écoresponsables, pour une hygiène durable.</p>
+                </div>
             </div>
-            <div class="engagement-card">
-                <img src="assets/images/icon-security.png" alt="Sécurité" class="eng-img">
-                <h3>Sécurité et Efficacité</h3>
-                <p>Des interventions conformes aux normes, sans compromis sur la performance.</p>
+            <div class="col-lg-4 col-md-12">
+                <div class="engagement-card text-center h-100">
+                    <img src="assets/images/icon-security.png" alt="Sécurité" class="eng-img">
+                    <h3>Sécurité et Efficacité</h3>
+                    <p>Des interventions conformes aux normes, sans compromis sur la performance.</p>
+                </div>
             </div>
         </div>
     </div>
