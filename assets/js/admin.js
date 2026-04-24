@@ -172,4 +172,97 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => { alert.style.transition = 'opacity 0.5s'; alert.style.opacity = '0'; setTimeout(() => alert.remove(), 500); }, 5000);
         }
     });
+
+    // ===== RICH TEXT EDITOR =====
+    const editor = document.getElementById('reportEditor');
+    const hiddenInput = document.getElementById('reportContentHidden');
+    if (editor && hiddenInput) {
+        // Update word/char count
+        function updateCounts() {
+            const text = editor.innerText || '';
+            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+            const chars = text.length;
+            const wc = document.getElementById('editorWordCount');
+            const cc = document.getElementById('editorCharCount');
+            if (wc) wc.textContent = words + ' mot' + (words !== 1 ? 's' : '');
+            if (cc) cc.textContent = chars + ' caractère' + (chars !== 1 ? 's' : '');
+        }
+        editor.addEventListener('input', updateCounts);
+        updateCounts();
+
+        // Sync editor to hidden textarea before submit
+        editor.closest('form').addEventListener('submit', function() {
+            hiddenInput.value = editor.innerHTML;
+        });
+
+        // Toolbar buttons
+        document.querySelectorAll('.toolbar-btn[data-command]').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const cmd = this.dataset.command;
+                editor.focus();
+
+                if (cmd === 'createLink') {
+                    const url = prompt('Entrez l\'URL du lien :', 'https://');
+                    if (url) document.execCommand('createLink', false, url);
+                } else if (cmd === 'insertTable') {
+                    const rows = prompt('Nombre de lignes :', '3');
+                    const cols = prompt('Nombre de colonnes :', '3');
+                    if (rows && cols) {
+                        let table = '<table><thead><tr>';
+                        for (let c = 0; c < parseInt(cols); c++) table += '<th>En-tête</th>';
+                        table += '</tr></thead><tbody>';
+                        for (let r = 0; r < parseInt(rows) - 1; r++) {
+                            table += '<tr>';
+                            for (let c = 0; c < parseInt(cols); c++) table += '<td>&nbsp;</td>';
+                            table += '</tr>';
+                        }
+                        table += '</tbody></table><p><br></p>';
+                        document.execCommand('insertHTML', false, table);
+                    }
+                } else {
+                    document.execCommand(cmd, false, null);
+                }
+                updateCounts();
+            });
+        });
+
+        // Toolbar selects (formatBlock, fontSize)
+        document.querySelectorAll('.toolbar-select[data-command]').forEach(sel => {
+            sel.addEventListener('change', function() {
+                editor.focus();
+                const cmd = this.dataset.command;
+                const val = this.value;
+                if (cmd === 'formatBlock') {
+                    document.execCommand('formatBlock', false, '<' + val + '>');
+                } else {
+                    document.execCommand(cmd, false, val);
+                }
+                updateCounts();
+            });
+        });
+
+        // Color pickers
+        document.querySelectorAll('.toolbar-color-input').forEach(input => {
+            input.addEventListener('input', function() {
+                editor.focus();
+                document.execCommand(this.dataset.command, false, this.value);
+            });
+            // Prevent toolbar-btn click when clicking color input
+            input.addEventListener('click', function(e) { e.stopPropagation(); });
+        });
+
+        // Track active formatting state on selection change
+        document.addEventListener('selectionchange', function() {
+            if (!editor.contains(document.activeElement) && document.activeElement !== editor) return;
+            document.querySelectorAll('.toolbar-btn[data-command]').forEach(btn => {
+                const cmd = btn.dataset.command;
+                if (['bold','italic','underline','strikeThrough','insertUnorderedList','insertOrderedList','justifyLeft','justifyCenter','justifyRight','justifyFull'].includes(cmd)) {
+                    try {
+                        btn.classList.toggle('active', document.queryCommandState(cmd));
+                    } catch(e) {}
+                }
+            });
+        });
+    }
 });

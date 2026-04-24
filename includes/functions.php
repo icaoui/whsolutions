@@ -6,6 +6,16 @@ function sanitize($data) {
     return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
 }
 
+function sanitizeHtml($html) {
+    $allowed = '<b><i><u><s><strong><em><br><p><ul><ol><li><h1><h2><h3><h4><blockquote><pre><code><hr><span><div><table><thead><tbody><tr><th><td><a><sub><sup>';
+    $html = strip_tags(trim($html), $allowed);
+    // Remove event handlers and javascript: from attributes
+    $html = preg_replace('/\bon\w+\s*=\s*["\'][^"\']*["\']/i', '', $html);
+    $html = preg_replace('/\bon\w+\s*=\s*\S+/i', '', $html);
+    $html = preg_replace('/href\s*=\s*["\']?\s*javascript:/i', 'href="', $html);
+    return $html;
+}
+
 function isSuperAdmin() {
     return isset($_SESSION['admin_role']) && $_SESSION['admin_role'] === 'super_admin';
 }
