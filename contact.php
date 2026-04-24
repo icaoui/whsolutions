@@ -40,68 +40,41 @@ require_once 'includes/header.php';
 
 <section class="section">
     <div class="container">
-        <?php if($success): ?>
-        <div class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert">
-            <i class="fas fa-check-circle me-2 fs-5"></i>
-            <div><?= $success ?></div>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
-        </div>
-        <?php endif; ?>
-        <?php if($error): ?>
-        <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
-            <i class="fas fa-exclamation-circle me-2 fs-5"></i>
-            <div><?= $error ?></div>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
-        </div>
-        <?php endif; ?>
+        <?php if($success): ?><div class="alert alert-success"><i class="fas fa-check-circle"></i> <?= $success ?></div><?php endif; ?>
+        <?php if($error): ?><div class="alert alert-error"><i class="fas fa-exclamation-circle"></i> <?= $error ?></div><?php endif; ?>
 
         <div class="contact-grid">
             <!-- Form -->
             <div class="animate-left">
                 <h2 style="font-size:1.8rem; color:var(--primary); margin-bottom:10px;">Envoyez-nous un message</h2>
                 <p style="color:var(--gray-600); margin-bottom:30px;">Remplissez le formulaire ci-dessous et nous vous répondrons rapidement.</p>
-                <form method="POST" class="needs-validation" novalidate>
-                    <div class="row g-3 mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label fw-semibold">Nom Complet *</label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-white"><i class="fas fa-user text-muted"></i></span>
-                                <input type="text" name="name" class="form-control" required placeholder="Votre nom">
-                                <div class="invalid-feedback">Veuillez entrer votre nom.</div>
-                            </div>
+                <form method="POST">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+                        <div class="form-group">
+                            <label>Nom Complet *</label>
+                            <input type="text" name="name" required placeholder="Votre nom">
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label fw-semibold">Email *</label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-white"><i class="fas fa-envelope text-muted"></i></span>
-                                <input type="email" name="email" class="form-control" required placeholder="Votre email">
-                                <div class="invalid-feedback">Veuillez entrer un email valide.</div>
-                            </div>
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" name="email" required placeholder="Votre email">
                         </div>
                     </div>
-                    <div class="row g-3 mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label fw-semibold">Téléphone</label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-white"><i class="fas fa-phone text-muted"></i></span>
-                                <input type="tel" name="phone" class="form-control" placeholder="Votre téléphone">
-                            </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+                        <div class="form-group">
+                            <label>Téléphone</label>
+                            <input type="tel" name="phone" placeholder="Votre téléphone">
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label fw-semibold">Sujet</label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-white"><i class="fas fa-tag text-muted"></i></span>
-                                <input type="text" name="subject" class="form-control" placeholder="Sujet du message">
-                            </div>
+                        <div class="form-group">
+                            <label>Sujet</label>
+                            <input type="text" name="subject" placeholder="Sujet du message">
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold">Message *</label>
-                        <textarea name="message" class="form-control" rows="5" required placeholder="Décrivez votre besoin..."></textarea>
-                        <div class="invalid-feedback">Veuillez entrer votre message.</div>
+                    <div class="form-group">
+                        <label>Message *</label>
+                        <textarea name="message" required placeholder="Décrivez votre besoin..."></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100 py-3 fw-bold" style="background:linear-gradient(135deg, var(--primary), var(--secondary)); border:none; border-radius:12px; font-size:1rem;">
-                        <i class="fas fa-paper-plane me-2"></i> Envoyer le Message
+                    <button type="submit" class="btn btn-primary" style="width:100%; padding:16px;">
+                        <i class="fas fa-paper-plane"></i> Envoyer le Message
                     </button>
                 </form>
             </div>
@@ -155,17 +128,5 @@ require_once 'includes/header.php';
         </div>
     </div>
 </section>
-
-<!-- Bootstrap form validation -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.needs-validation').forEach(function(form) {
-        form.addEventListener('submit', function(e) {
-            if (!form.checkValidity()) { e.preventDefault(); e.stopPropagation(); }
-            form.classList.add('was-validated');
-        });
-    });
-});
-</script>
 
 <?php require_once 'includes/footer.php'; ?>

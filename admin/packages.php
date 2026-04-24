@@ -168,7 +168,7 @@ if (isset($_GET['edit'])) {
             <div style="margin-top:20px; border-top:1px solid #eee; padding-top:20px;">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
                     <h4 style="margin:0;">Caractéristiques du package</h4>
-                    <button type="button" onclick="addFeature()" class="btn-sm" style="background:var(--secondary,#4ECDC4); color:#fff; border:none; padding:8px 16px; border-radius:8px; cursor:pointer;">
+                    <button type="button" onclick="addFeature()" class="btn-admin btn-admin-primary" style="padding:8px 16px; font-size:0.85rem;">
                         <i class="fas fa-plus"></i> Ajouter
                     </button>
                 </div>
@@ -196,9 +196,9 @@ if (isset($_GET['edit'])) {
             </div>
 
             <div style="margin-top:20px; display:flex; gap:10px;">
-                <button type="submit" class="btn btn-primary"><?= $editPackage ? 'Modifier' : 'Ajouter' ?></button>
+                <button type="submit" class="btn-admin btn-admin-primary"><i class="fas fa-save"></i> <?= $editPackage ? 'Modifier' : 'Ajouter' ?></button>
                 <?php if($editPackage): ?>
-                <a href="packages.php" class="btn btn-secondary">Annuler</a>
+                <a href="packages.php" class="btn-admin btn-admin-secondary"><i class="fas fa-times"></i> Annuler</a>
                 <?php endif; ?>
             </div>
         </form>
@@ -263,9 +263,9 @@ if (isset($_GET['edit'])) {
                         </td>
                         <td>
                             <div style="display:flex; gap:5px;">
-                                <a href="packages.php?edit=<?= $pkg['id'] ?>" class="btn-icon" title="Modifier"><i class="fas fa-edit"></i></a>
+                                <a href="packages.php?edit=<?= $pkg['id'] ?>" class="btn-icon btn-edit" title="Modifier"><i class="fas fa-edit"></i></a>
                                 <?php if(isSuperAdmin()): ?>
-                                <a href="packages.php?delete=<?= $pkg['id'] ?>" class="btn-icon btn-danger" title="Supprimer" onclick="return confirm('Supprimer ce package ?')"><i class="fas fa-trash"></i></a>
+                                <a href="packages.php?delete=<?= $pkg['id'] ?>" class="btn-icon btn-delete" title="Supprimer" onclick="return confirm('Supprimer ce package ?')"><i class="fas fa-trash"></i></a>
                                 <?php endif; ?>
                             </div>
                         </td>

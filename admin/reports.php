@@ -112,9 +112,9 @@ $catColors = ['general' => '#1B3A5C', 'commercial' => '#27ae60', 'technique' => 
     <div class="card-header" style="display:flex; justify-content:space-between; align-items:center;">
         <h3 style="margin:0;"><?= sanitize($viewReport['title']) ?></h3>
         <div style="display:flex; gap:8px;">
-            <a href="reports.php?export=<?= $viewReport['id'] ?>" class="btn btn-primary" style="font-size:0.85rem; padding:8px 16px;"><i class="fas fa-download"></i> Exporter HTML</a>
-            <a href="reports.php?edit=<?= $viewReport['id'] ?>" class="btn btn-secondary" style="font-size:0.85rem; padding:8px 16px;"><i class="fas fa-edit"></i> Modifier</a>
-            <a href="reports.php" class="btn btn-secondary" style="font-size:0.85rem; padding:8px 16px;"><i class="fas fa-arrow-left"></i> Retour</a>
+            <a href="reports.php?export=<?= $viewReport['id'] ?>" class="btn-admin btn-admin-primary" style="font-size:0.85rem; padding:8px 16px;"><i class="fas fa-download"></i> Exporter HTML</a>
+            <a href="reports.php?edit=<?= $viewReport['id'] ?>" class="btn-admin btn-admin-secondary" style="font-size:0.85rem; padding:8px 16px;"><i class="fas fa-edit"></i> Modifier</a>
+            <a href="reports.php" class="btn-admin btn-admin-secondary" style="font-size:0.85rem; padding:8px 16px;"><i class="fas fa-arrow-left"></i> Retour</a>
         </div>
     </div>
     <div class="card-body">
@@ -167,9 +167,9 @@ $catColors = ['general' => '#1B3A5C', 'commercial' => '#27ae60', 'technique' => 
             </div>
 
             <div style="margin-top:15px; display:flex; gap:10px;">
-                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> <?= $editReport ? 'Modifier' : 'Enregistrer' ?></button>
+                <button type="submit" class="btn-admin btn-admin-primary"><i class="fas fa-save"></i> <?= $editReport ? 'Modifier' : 'Enregistrer' ?></button>
                 <?php if($editReport): ?>
-                <a href="reports.php" class="btn btn-secondary">Annuler</a>
+                <a href="reports.php" class="btn-admin btn-admin-secondary"><i class="fas fa-times"></i> Annuler</a>
                 <?php endif; ?>
             </div>
         </form>
@@ -193,8 +193,8 @@ $catColors = ['general' => '#1B3A5C', 'commercial' => '#27ae60', 'technique' => 
                     <?php endforeach; ?>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary" style="height:42px;">Filtrer</button>
-            <a href="reports.php" class="btn btn-secondary" style="height:42px;">Reset</a>
+            <button type="submit" class="btn-admin btn-admin-primary" style="height:42px;"><i class="fas fa-filter"></i> Filtrer</button>
+            <a href="reports.php" class="btn-admin btn-admin-secondary" style="height:42px;"><i class="fas fa-redo"></i> Reset</a>
         </form>
     </div>
 </div>
@@ -225,10 +225,10 @@ $catColors = ['general' => '#1B3A5C', 'commercial' => '#27ae60', 'technique' => 
                     </div>
                 </div>
                 <div style="display:flex; gap:5px; flex-shrink:0;">
-                    <a href="reports.php?view=<?= $r['id'] ?>" class="btn-icon" title="Voir"><i class="fas fa-eye"></i></a>
-                    <a href="reports.php?export=<?= $r['id'] ?>" class="btn-icon" title="Exporter" style="background:#27ae6020; color:#27ae60;"><i class="fas fa-download"></i></a>
-                    <a href="reports.php?edit=<?= $r['id'] ?>" class="btn-icon" title="Modifier"><i class="fas fa-edit"></i></a>
-                    <a href="reports.php?delete=<?= $r['id'] ?>" class="btn-icon btn-danger" title="Supprimer" onclick="return confirm('Supprimer ce rapport ?')"><i class="fas fa-trash"></i></a>
+                    <a href="reports.php?view=<?= $r['id'] ?>" class="btn-icon btn-edit" title="Voir"><i class="fas fa-eye"></i></a>
+                    <a href="reports.php?export=<?= $r['id'] ?>" class="btn-icon" style="background:rgba(39,174,96,0.1); color:#27ae60;" title="Exporter"><i class="fas fa-download"></i></a>
+                    <a href="reports.php?edit=<?= $r['id'] ?>" class="btn-icon btn-edit" title="Modifier"><i class="fas fa-edit"></i></a>
+                    <a href="reports.php?delete=<?= $r['id'] ?>" class="btn-icon btn-delete" title="Supprimer" onclick="return confirm('Supprimer ce rapport ?')"><i class="fas fa-trash"></i></a>
                 </div>
             </div>
             <?php endforeach; ?>

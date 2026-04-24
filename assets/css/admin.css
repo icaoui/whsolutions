@@ -21,7 +21,14 @@ a { text-decoration:none; color:inherit; }
 .login-footer a { color:var(--secondary); font-size:0.9rem; }
 .alert { padding:12px 18px; border-radius:8px; margin-bottom:20px; font-size:0.9rem; display:flex; align-items:center; gap:10px; }
 .alert-success { background:rgba(72,187,120,0.1); color:#22543D; border-left:4px solid var(--success); }
-.alert-error { background:rgba(245,101,101,0.1); color:#742A2A; border-left:4px solid var(--danger); }
+.alert-error, .alert-danger { background:rgba(245,101,101,0.1); color:#742A2A; border-left:4px solid var(--danger); }
+
+/* STATUS BADGES */
+.status-badge { display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.78rem; font-weight:600; }
+.status-active { background:rgba(72,187,120,0.1); color:#27ae60; }
+.status-inactive { background:rgba(160,174,192,0.15); color:var(--gray-600); }
+.status-pending { background:rgba(243,156,18,0.1); color:#f39c12; }
+.status-expired { background:rgba(231,76,60,0.1); color:#e74c3c; }
 
 /* LAYOUT */
 .admin-wrapper { display:flex; min-height:100vh; }
@@ -88,8 +95,8 @@ a { text-decoration:none; color:inherit; }
 /* FORMS */
 .form-group { margin-bottom:18px; }
 .form-group label { display:block; font-weight:600; color:var(--gray-700); margin-bottom:6px; font-size:0.85rem; }
-.form-group input, .form-group textarea, .form-group select { width:100%; padding:10px 14px; border:2px solid var(--gray-200); border-radius:8px; font-family:var(--font); font-size:0.9rem; transition:var(--transition); }
-.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color:var(--secondary); outline:none; box-shadow:0 0 0 3px rgba(78,205,196,0.15); }
+.form-control, .form-group input, .form-group textarea, .form-group select { width:100%; padding:10px 14px; border:2px solid var(--gray-200); border-radius:8px; font-family:var(--font); font-size:0.9rem; transition:var(--transition); }
+.form-control:focus, .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color:var(--secondary); outline:none; box-shadow:0 0 0 3px rgba(78,205,196,0.15); }
 .form-group textarea { min-height:100px; resize:vertical; }
 .form-group small code { background:var(--gray-100); padding:2px 6px; border-radius:4px; font-size:0.82rem; color:var(--primary); }
 .form-row { display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:end; }

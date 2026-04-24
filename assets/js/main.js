@@ -204,38 +204,6 @@ document.addEventListener('DOMContentLoaded', function() {
         textObs.observe(heading);
     });
 
-    /* ─── SITE TOAST SYSTEM ─── */
-    window.siteToast = function(type, title, message) {
-        let container = document.querySelector('.site-toast-container');
-        if (!container) {
-            container = document.createElement('div');
-            container.className = 'site-toast-container';
-            document.body.appendChild(container);
-        }
-        const toast = document.createElement('div');
-        toast.className = 'site-toast toast-' + type;
-        const icon = type === 'ok' ? 'fa-check-circle' : 'fa-exclamation-circle';
-        toast.innerHTML = '<div class="site-toast-icon"><i class="fas ' + icon + '"></i></div>' +
-            '<div class="site-toast-body"><strong>' + title + '</strong><small>' + (message || '') + '</small></div>' +
-            '<button class="site-toast-close" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>';
-        container.appendChild(toast);
-        requestAnimationFrame(() => toast.classList.add('show'));
-        setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 400); }, 4000);
-    };
-
-    /* ─── FORM SUBMIT LOADING STATE ─── */
-    document.querySelectorAll('form').forEach(form => {
-        form.addEventListener('submit', function() {
-            const btn = this.querySelector('button[type="submit"], input[type="submit"]');
-            if (btn && btn.tagName === 'BUTTON') {
-                btn.classList.add('loading');
-                const text = btn.innerHTML;
-                btn.setAttribute('data-original', text);
-                btn.innerHTML = '<span class="btn-text">' + text + '</span>';
-            }
-        });
-    });
-
     /* ─── IMAGE LAZY LOADING ─── */
     document.querySelectorAll('img[data-src]').forEach(img => {
         const imgObs = new IntersectionObserver((entries) => {

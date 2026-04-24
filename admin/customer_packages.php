@@ -196,8 +196,8 @@ if (isset($_GET['edit'])) {
                 </div>
             </div>
             <div style="margin-top:15px; display:flex; gap:10px;">
-                <button type="submit" class="btn btn-primary"><?= $editCustomer ? 'Modifier' : 'Ajouter' ?></button>
-                <?php if($editCustomer): ?><a href="customer_packages.php" class="btn btn-secondary">Annuler</a><?php endif; ?>
+                <button type="submit" class="btn-admin btn-admin-primary"><i class="fas fa-save"></i> <?= $editCustomer ? 'Modifier' : 'Ajouter' ?></button>
+                <?php if($editCustomer): ?><a href="customer_packages.php" class="btn-admin btn-admin-secondary"><i class="fas fa-times"></i> Annuler</a><?php endif; ?>
             </div>
         </form>
     </div>
@@ -230,8 +230,8 @@ if (isset($_GET['edit'])) {
                     <?php endforeach; ?>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary" style="height:42px;">Filtrer</button>
-            <a href="customer_packages.php" class="btn btn-secondary" style="height:42px;">Reset</a>
+            <button type="submit" class="btn-admin btn-admin-primary" style="height:42px;"><i class="fas fa-filter"></i> Filtrer</button>
+            <a href="customer_packages.php" class="btn-admin btn-admin-secondary" style="height:42px;"><i class="fas fa-redo"></i> Reset</a>
         </form>
     </div>
 </div>
@@ -309,9 +309,9 @@ if (isset($_GET['edit'])) {
                                 <?php if($c['status'] === 'expired' || $c['status'] === 'cancelled'): ?>
                                 <a href="customer_packages.php?id=<?= $c['id'] ?>&status=active" class="btn-icon" style="background:#27ae60; color:#fff;" title="Réactiver"><i class="fas fa-redo"></i></a>
                                 <?php endif; ?>
-                                <a href="customer_packages.php?edit=<?= $c['id'] ?>" class="btn-icon" title="Modifier"><i class="fas fa-edit"></i></a>
+                                <a href="customer_packages.php?edit=<?= $c['id'] ?>" class="btn-icon btn-edit" title="Modifier"><i class="fas fa-edit"></i></a>
                                 <?php if(isSuperAdmin()): ?>
-                                <a href="customer_packages.php?delete=<?= $c['id'] ?>" class="btn-icon btn-danger" title="Supprimer" onclick="return confirm('Supprimer ?')"><i class="fas fa-trash"></i></a>
+                                <a href="customer_packages.php?delete=<?= $c['id'] ?>" class="btn-icon btn-delete" title="Supprimer" onclick="return confirm('Supprimer ?')"><i class="fas fa-trash"></i></a>
                                 <?php endif; ?>
                             </div>
                         </td>
