@@ -204,4 +204,93 @@ document.addEventListener('DOMContentLoaded', function() {
         textObs.observe(heading);
     });
 
+    /* ─── PAGE PRELOADER ─── */
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        window.addEventListener('load', () => {
+            setTimeout(() => { preloader.classList.add('hidden'); }, 1600);
+        });
+        // Fallback: hide after 4s max
+        setTimeout(() => { if (preloader) preloader.classList.add('hidden'); }, 4000);
+    }
+
+    /* ─── PAGE TRANSITION ─── */
+    document.querySelector('.admin-content, main, .section:first-of-type')?.classList.add('page-transition');
+
+    /* ─── DARK MODE TOGGLE ─── */
+    const darkToggle = document.querySelector('.dark-toggle');
+    if (darkToggle) {
+        // Restore preference
+        if (localStorage.getItem('wh_dark') === '1') {
+            document.body.classList.add('dark-mode');
+            darkToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        darkToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('wh_dark', isDark ? '1' : '0');
+            darkToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+    }
+
+    /* ─── SITE TOAST SYSTEM ─── */
+    window.siteToast = function(type, title, message) {
+        let container = document.querySelector('.site-toast-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.className = 'site-toast-container';
+            document.body.appendChild(container);
+        }
+        const toast = document.createElement('div');
+        toast.className = 'site-toast toast-' + type;
+        const icon = type === 'ok' ? 'fa-check-circle' : 'fa-exclamation-circle';
+        toast.innerHTML = '<div class="site-toast-icon"><i class="fas ' + icon + '"></i></div>' +
+            '<div class="site-toast-body"><strong>' + title + '</strong><small>' + (message || '') + '</small></div>' +
+            '<button class="site-toast-close" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>';
+        container.appendChild(toast);
+        requestAnimationFrame(() => toast.classList.add('show'));
+        setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 400); }, 4000);
+    };
+
+    /* ─── FORM SUBMIT LOADING STATE ─── */
+    document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('submit', function() {
+            const btn = this.querySelector('button[type="submit"], input[type="submit"]');
+            if (btn && btn.tagName === 'BUTTON') {
+                btn.classList.add('loading');
+                const text = btn.innerHTML;
+                btn.setAttribute('data-original', text);
+                btn.innerHTML = '<span class="btn-text">' + text + '</span>';
+            }
+        });
+    });
+
+    /* ─── COOKIE CONSENT ─── */
+    const cookieBanner = document.querySelector('.cookie-banner');
+    if (cookieBanner && !localStorage.getItem('wh_cookies')) {
+        setTimeout(() => { cookieBanner.classList.add('show'); }, 2000);
+        cookieBanner.querySelector('.cookie-btn-accept')?.addEventListener('click', () => {
+            localStorage.setItem('wh_cookies', 'accepted');
+            cookieBanner.classList.remove('show');
+        });
+        cookieBanner.querySelector('.cookie-btn-decline')?.addEventListener('click', () => {
+            localStorage.setItem('wh_cookies', 'declined');
+            cookieBanner.classList.remove('show');
+        });
+    }
+
+    /* ─── IMAGE LAZY LOADING ─── */
+    document.querySelectorAll('img[data-src]').forEach(img => {
+        const imgObs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.src = entry.target.dataset.src;
+                    entry.target.removeAttribute('data-src');
+                    imgObs.unobserve(entry.target);
+                }
+            });
+        }, { rootMargin: '100px' });
+        imgObs.observe(img);
+    });
+
 });

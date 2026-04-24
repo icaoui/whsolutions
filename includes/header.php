@@ -80,8 +80,19 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
 <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
 </head>
 <body>
+<!-- Preloader -->
+<div id="preloader">
+    <div class="preloader-inner">
+        <img src="<?= SITE_URL ?>/assets/images/logo.png" alt="Chargement" class="preloader-logo">
+        <div class="preloader-bar"><div class="preloader-fill"></div></div>
+    </div>
+</div>
+
 <!-- Scroll Progress -->
 <div class="scroll-progress"></div>
+
+<!-- Dark Mode Toggle -->
+<button class="dark-toggle" aria-label="Mode sombre"><i class="fas fa-moon"></i></button>
 
 <!-- WhatsApp Float Button -->
 <a href="<?= getWhatsAppGeneralLink() ?>" target="_blank" class="whatsapp-float" title="Commander via WhatsApp">
