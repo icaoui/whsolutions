@@ -42,6 +42,22 @@ $recentMessages = $pdo->query("SELECT * FROM messages ORDER BY created_at DESC L
 $recentInquiries = $pdo->query("SELECT i.*, p.name as product_name FROM inquiries i LEFT JOIN products p ON i.product_id = p.id ORDER BY i.created_at DESC LIMIT 5")->fetchAll();
 ?>
 
+<!-- Welcome Banner -->
+<div class="welcome-banner">
+    <h2>Bonjour, <?= sanitize($_SESSION['admin_name'] ?? 'Admin') ?> 👋</h2>
+    <p>Voici un aperçu de votre activité. Bonne journée !</p>
+    <span class="welcome-date"><i class="fas fa-calendar-alt"></i> <?= date('d/m/Y') ?></span>
+</div>
+
+<!-- Quick Actions -->
+<div class="quick-actions-row">
+    <a href="products.php" class="qa-btn"><i class="fas fa-plus-circle"></i> Nouveau Produit</a>
+    <a href="packages.php" class="qa-btn"><i class="fas fa-gem"></i> Gérer Packages</a>
+    <a href="customer_packages.php" class="qa-btn"><i class="fas fa-user-tag"></i> Clients</a>
+    <a href="messages.php" class="qa-btn"><i class="fas fa-envelope"></i> Messages <?php if($unreadMessages > 0): ?><span style="background:var(--danger); color:#fff; border-radius:50%; width:20px; height:20px; display:inline-flex; align-items:center; justify-content:center; font-size:0.7rem;"><?= $unreadMessages ?></span><?php endif; ?></a>
+    <a href="reports.php" class="qa-btn"><i class="fas fa-file-alt"></i> Rapports</a>
+</div>
+
 <!-- Stats Cards -->
 <div class="stats-grid">
     <div class="stat-card stat-primary">
