@@ -204,35 +204,6 @@ document.addEventListener('DOMContentLoaded', function() {
         textObs.observe(heading);
     });
 
-    /* ─── PAGE PRELOADER ─── */
-    const preloader = document.getElementById('preloader');
-    if (preloader) {
-        window.addEventListener('load', () => {
-            setTimeout(() => { preloader.classList.add('hidden'); }, 1600);
-        });
-        // Fallback: hide after 4s max
-        setTimeout(() => { if (preloader) preloader.classList.add('hidden'); }, 4000);
-    }
-
-    /* ─── PAGE TRANSITION ─── */
-    document.querySelector('.admin-content, main, .section:first-of-type')?.classList.add('page-transition');
-
-    /* ─── DARK MODE TOGGLE ─── */
-    const darkToggle = document.querySelector('.dark-toggle');
-    if (darkToggle) {
-        // Restore preference
-        if (localStorage.getItem('wh_dark') === '1') {
-            document.body.classList.add('dark-mode');
-            darkToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        }
-        darkToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('wh_dark', isDark ? '1' : '0');
-            darkToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-        });
-    }
-
     /* ─── SITE TOAST SYSTEM ─── */
     window.siteToast = function(type, title, message) {
         let container = document.querySelector('.site-toast-container');
@@ -264,20 +235,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-
-    /* ─── COOKIE CONSENT ─── */
-    const cookieBanner = document.querySelector('.cookie-banner');
-    if (cookieBanner && !localStorage.getItem('wh_cookies')) {
-        setTimeout(() => { cookieBanner.classList.add('show'); }, 2000);
-        cookieBanner.querySelector('.cookie-btn-accept')?.addEventListener('click', () => {
-            localStorage.setItem('wh_cookies', 'accepted');
-            cookieBanner.classList.remove('show');
-        });
-        cookieBanner.querySelector('.cookie-btn-decline')?.addEventListener('click', () => {
-            localStorage.setItem('wh_cookies', 'declined');
-            cookieBanner.classList.remove('show');
-        });
-    }
 
     /* ─── IMAGE LAZY LOADING ─── */
     document.querySelectorAll('img[data-src]').forEach(img => {

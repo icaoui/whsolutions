@@ -254,18 +254,15 @@ a { text-decoration:none; color:inherit; }
 @keyframes toastProgress { from { width:100%; } to { width:0; } }
 
 /* WELCOME BANNER */
-.welcome-banner { background:linear-gradient(135deg, var(--primary) 0%, #0a1628 50%, var(--dark) 100%); border-radius:16px; padding:30px 35px; margin-bottom:25px; color:var(--white); position:relative; overflow:hidden; }
-.welcome-banner::before { content:''; position:absolute; width:200px; height:200px; border-radius:50%; background:var(--secondary); opacity:0.08; top:-60px; right:-30px; }
-.welcome-banner::after { content:''; position:absolute; width:150px; height:150px; border-radius:50%; background:var(--info); opacity:0.06; bottom:-40px; right:80px; }
-.welcome-banner h2 { font-size:1.4rem; font-weight:700; margin-bottom:5px; position:relative; z-index:1; }
-.welcome-banner p { opacity:0.7; font-size:0.9rem; position:relative; z-index:1; margin:0; }
-.welcome-banner .welcome-date { position:absolute; top:30px; right:35px; opacity:0.5; font-size:0.82rem; }
+.welcome-banner { background:var(--white); border-radius:var(--radius); padding:22px 28px; margin-bottom:25px; box-shadow:var(--shadow); display:flex; align-items:center; justify-content:space-between; gap:20px; border-left:4px solid var(--secondary); }
+.welcome-text h2 { font-size:1.15rem; font-weight:700; color:var(--primary); display:flex; align-items:center; gap:10px; margin-bottom:3px; }
+.welcome-text h2 i { color:var(--secondary); }
+.welcome-text p { color:var(--gray-500); font-size:0.85rem; margin:0; }
+.welcome-actions { display:flex; gap:10px; flex-shrink:0; }
 
-/* QUICK ACTIONS ROW */
-.quick-actions-row { display:flex; gap:10px; margin-bottom:25px; flex-wrap:wrap; }
-.qa-btn { display:inline-flex; align-items:center; gap:8px; padding:10px 20px; background:var(--white); border:2px solid var(--gray-200); border-radius:10px; font-family:var(--font); font-size:0.85rem; font-weight:600; color:var(--gray-700); cursor:pointer; transition:all 0.25s ease; text-decoration:none; }
-.qa-btn:hover { border-color:var(--secondary); color:var(--secondary); transform:translateY(-2px); box-shadow:var(--shadow); }
-.qa-btn i { width:18px; text-align:center; }
+/* HEADER SEARCH BUTTON */
+.header-search-btn { width:35px; height:35px; border-radius:8px; border:none; background:var(--gray-100); color:var(--gray-500); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:0.9rem; transition:var(--transition); }
+.header-search-btn:hover { background:rgba(78,205,196,0.1); color:var(--secondary); }
 
 /* CARD HEADER IMPROVEMENTS */
 .card-header { display:flex; align-items:center; justify-content:space-between; padding-bottom:15px; margin-bottom:15px; border-bottom:1px solid var(--gray-200); }
@@ -298,28 +295,16 @@ a { text-decoration:none; color:inherit; }
 .spotlight-item small { color:var(--gray-500); font-size:0.75rem; margin-left:auto; }
 .spotlight-hint { padding:10px 24px; text-align:center; font-size:0.75rem; color:var(--gray-400); border-top:1px solid var(--gray-200); }
 
-/* SIDEBAR TOOLTIP ON COLLAPSE */
-.sidebar-collapse .sidebar { width:70px; }
-.sidebar-collapse .sidebar-title, .sidebar-collapse .nav-item span, .sidebar-collapse .nav-label { display:none; }
-.sidebar-collapse .nav-item { justify-content:center; padding:14px 0; border-left:none; }
-.sidebar-collapse .nav-item i { font-size:1.2rem; }
-.sidebar-collapse .sidebar-header { justify-content:center; }
-.sidebar-collapse .admin-main { margin-left:70px; }
-.sidebar-collapse .nav-divider { margin:10px; }
-
 /* RESPONSIVE FOR NEW ELEMENTS */
-@media (min-width:993px) {
-    #spotlightBtn span { display:inline !important; }
-}
 @media (max-width:992px) {
-    #sidebarCollapse { display:none !important; }
-    .welcome-banner .welcome-date { position:static; margin-top:10px; display:block; }
-    .quick-actions-row { gap:8px; }
-    .qa-btn { padding:8px 14px; font-size:0.8rem; }
+    .welcome-banner { flex-direction:column; text-align:center; }
+    .welcome-actions { justify-content:center; }
     .spotlight-box { margin:0 15px; }
 }
 @media (max-width:480px) {
-    .welcome-banner { padding:20px; }
-    .welcome-banner h2 { font-size:1.1rem; }
+    .welcome-banner { padding:18px; }
+    .welcome-text h2 { font-size:1rem; }
+    .welcome-actions { flex-direction:column; }
+    .welcome-actions .btn-admin { width:100%; justify-content:center; }
     .toast { min-width:auto; max-width:calc(100vw - 40px); }
 }

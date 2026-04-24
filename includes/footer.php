@@ -48,18 +48,6 @@
     </div>
 </footer>
 
-<!-- Cookie Consent -->
-<div class="cookie-banner">
-    <div class="cookie-banner-text">
-        <i class="fas fa-cookie-bite" style="color:var(--gold);margin-right:6px;"></i>
-        Ce site utilise des cookies pour améliorer votre expérience. En continuant, vous acceptez notre utilisation des cookies.
-    </div>
-    <div class="cookie-banner-actions">
-        <button class="cookie-btn cookie-btn-accept">Accepter</button>
-        <button class="cookie-btn cookie-btn-decline">Refuser</button>
-    </div>
-</div>
-
 <!-- Back to Top -->
 <button id="backToTop" class="back-to-top" aria-label="Retour en haut"><i class="fas fa-arrow-up"></i></button>
 

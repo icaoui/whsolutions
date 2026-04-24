@@ -44,18 +44,14 @@ $recentInquiries = $pdo->query("SELECT i.*, p.name as product_name FROM inquirie
 
 <!-- Welcome Banner -->
 <div class="welcome-banner">
-    <h2>Bonjour, <?= sanitize($_SESSION['admin_name'] ?? 'Admin') ?> 👋</h2>
-    <p>Voici un aperçu de votre activité. Bonne journée !</p>
-    <span class="welcome-date"><i class="fas fa-calendar-alt"></i> <?= date('d/m/Y') ?></span>
-</div>
-
-<!-- Quick Actions -->
-<div class="quick-actions-row">
-    <a href="products.php" class="qa-btn"><i class="fas fa-plus-circle"></i> Nouveau Produit</a>
-    <a href="packages.php" class="qa-btn"><i class="fas fa-gem"></i> Gérer Packages</a>
-    <a href="customer_packages.php" class="qa-btn"><i class="fas fa-user-tag"></i> Clients</a>
-    <a href="messages.php" class="qa-btn"><i class="fas fa-envelope"></i> Messages <?php if($unreadMessages > 0): ?><span style="background:var(--danger); color:#fff; border-radius:50%; width:20px; height:20px; display:inline-flex; align-items:center; justify-content:center; font-size:0.7rem;"><?= $unreadMessages ?></span><?php endif; ?></a>
-    <a href="reports.php" class="qa-btn"><i class="fas fa-file-alt"></i> Rapports</a>
+    <div class="welcome-text">
+        <h2><i class="fas fa-chart-line"></i> Bonjour, <?= sanitize($_SESSION['admin_name'] ?? 'Admin') ?></h2>
+        <p>Voici un aperçu de votre activité &mdash; <?= date('d/m/Y') ?></p>
+    </div>
+    <div class="welcome-actions">
+        <a href="products.php" class="btn-admin btn-admin-primary"><i class="fas fa-plus"></i> Nouveau Produit</a>
+        <a href="messages.php" class="btn-admin btn-admin-secondary"><i class="fas fa-envelope"></i> Messages<?php if($unreadMessages > 0): ?> <span class="stat-badge"><?= $unreadMessages ?></span><?php endif; ?></a>
+    </div>
 </div>
 
 <!-- Stats Cards -->

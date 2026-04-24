@@ -67,28 +67,17 @@ $adminPage = basename($_SERVER['PHP_SELF'], '.php');
     <!-- Main -->
     <main class="admin-main">
         <header class="admin-header">
-            <div style="display:flex; align-items:center; gap:10px;">
-                <button class="sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
-                <h1 class="page-title"><?= $adminTitle ?? 'Dashboard' ?></h1>
-            </div>
-            <div style="display:flex; align-items:center; gap:15px;">
-                <button id="spotlightBtn" style="display:flex; align-items:center; gap:8px; padding:8px 16px; background:var(--gray-100); border:1px solid var(--gray-200); border-radius:8px; font-family:var(--font); font-size:0.82rem; color:var(--gray-500); cursor:pointer; transition:all 0.2s;" title="Ctrl+K">
-                    <i class="fas fa-search"></i>
-                    <span style="display:none;">Rechercher...</span>
-                    <kbd style="background:var(--gray-200); padding:2px 6px; border-radius:4px; font-size:0.7rem; font-family:var(--font);">Ctrl+K</kbd>
-                </button>
-                <button id="sidebarCollapse" style="background:none; border:none; color:var(--gray-500); cursor:pointer; font-size:1rem; padding:4px;" title="Réduire le menu">
-                    <i class="fas fa-columns"></i>
-                </button>
-                <div class="admin-user">
-                    <span><?= sanitize($_SESSION['admin_name'] ?? 'Admin') ?></span>
-                    <?php if(isSuperAdmin()): ?>
-                    <span class="role-badge role-super">Super</span>
-                    <?php else: ?>
-                    <span class="role-badge role-admin">Admin</span>
-                    <?php endif; ?>
-                    <i class="fas fa-user-circle"></i>
-                </div>
+            <button class="sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+            <h1 class="page-title"><?= $adminTitle ?? 'Dashboard' ?></h1>
+            <div class="admin-user">
+                <button class="header-search-btn" id="spotlightBtn" title="Rechercher (Ctrl+K)"><i class="fas fa-search"></i></button>
+                <span><?= sanitize($_SESSION['admin_name'] ?? 'Admin') ?></span>
+                <?php if(isSuperAdmin()): ?>
+                <span class="role-badge role-super">Super</span>
+                <?php else: ?>
+                <span class="role-badge role-admin">Admin</span>
+                <?php endif; ?>
+                <i class="fas fa-user-circle"></i>
             </div>
         </header>
         <div class="admin-content">

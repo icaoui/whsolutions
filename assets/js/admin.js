@@ -160,17 +160,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchBtn = document.getElementById('spotlightBtn');
     if (searchBtn) searchBtn.addEventListener('click', openSpotlight);
 
-    // ===== SIDEBAR COLLAPSE (desktop) =====
-    const collapseBtn = document.getElementById('sidebarCollapse');
-    if (collapseBtn) {
-        const isCollapsed = localStorage.getItem('sidebar_collapsed') === '1';
-        if (isCollapsed) document.body.classList.add('sidebar-collapse');
-        collapseBtn.addEventListener('click', () => {
-            document.body.classList.toggle('sidebar-collapse');
-            localStorage.setItem('sidebar_collapsed', document.body.classList.contains('sidebar-collapse') ? '1' : '0');
-        });
-    }
-
     // ===== TABLE ROW HOVER HIGHLIGHT =====
     document.querySelectorAll('.admin-table tbody tr').forEach(row => {
         row.style.cursor = 'default';
