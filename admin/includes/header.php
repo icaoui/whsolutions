@@ -45,6 +45,11 @@ $adminPage = basename($_SERVER['PHP_SELF'], '.php');
             <a href="categories.php" class="nav-item <?= $adminPage === 'categories' ? 'active' : '' ?>"><i class="fas fa-th-large"></i><span>Catégories</span></a>
             <a href="messages.php" class="nav-item <?= $adminPage === 'messages' ? 'active' : '' ?>"><i class="fas fa-envelope"></i><span>Messages</span></a>
             <a href="inquiries.php" class="nav-item <?= $adminPage === 'inquiries' ? 'active' : '' ?>"><i class="fas fa-question-circle"></i><span>Demandes</span></a>
+            <div class="nav-divider"></div>
+            <span class="nav-label">Propositions de Valeur</span>
+            <a href="packages.php" class="nav-item <?= $adminPage === 'packages' ? 'active' : '' ?>"><i class="fas fa-gem"></i><span>Packages</span></a>
+            <a href="customer_packages.php" class="nav-item <?= $adminPage === 'customer_packages' ? 'active' : '' ?>"><i class="fas fa-user-tag"></i><span>Clients Packages</span></a>
+            <div class="nav-divider"></div>
             <a href="visitors.php" class="nav-item <?= $adminPage === 'visitors' ? 'active' : '' ?>"><i class="fas fa-users"></i><span>Visiteurs</span></a>
             <a href="settings.php" class="nav-item <?= $adminPage === 'settings' ? 'active' : '' ?>"><i class="fas fa-cog"></i><span>Paramètres</span></a>
             <?php if(isSuperAdmin()): ?>

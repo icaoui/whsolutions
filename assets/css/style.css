@@ -641,3 +641,128 @@ img { max-width: 100%; height: auto; }
 .input-group .input-group-text { border-radius: 8px 0 0 8px; }
 .carousel-item { transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out; }
 .alert { border-radius: var(--radius-sm); font-family: var(--font); }
+
+/* PACKAGES PAGE */
+.package-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 35px 30px;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+    border: 2px solid transparent;
+    overflow: hidden;
+}
+.package-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--pkg-color), var(--pkg-color)80);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.package-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+    border-color: var(--pkg-color);
+}
+.package-card:hover::before { opacity: 1; }
+.package-popular {
+    border-color: var(--pkg-color);
+    transform: scale(1.03);
+    box-shadow: 0 15px 50px rgba(0,0,0,0.12);
+}
+.package-popular::before { opacity: 1; height: 5px; }
+.package-popular:hover { transform: scale(1.03) translateY(-8px); }
+.package-badge {
+    position: absolute;
+    top: 20px; right: -30px;
+    padding: 6px 40px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transform: rotate(45deg);
+    z-index: 2;
+}
+.package-header { text-align: center; margin-bottom: 20px; }
+.package-icon-wrap {
+    width: 70px; height: 70px;
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 15px;
+    transition: transform 0.3s;
+}
+.package-card:hover .package-icon-wrap { transform: scale(1.1) rotate(5deg); }
+.package-name { font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-bottom: 5px; }
+.package-subtitle { color: var(--gray-500); font-size: 0.9rem; margin: 0; }
+.package-price {
+    text-align: center;
+    padding: 20px 0;
+    margin: 0 -30px;
+    background: var(--gray-100);
+    border-top: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--gray-200);
+}
+.price-amount { display: flex; align-items: baseline; justify-content: center; gap: 5px; }
+.price-value { font-size: 2.5rem; font-weight: 800; color: var(--primary); line-height: 1; }
+.price-currency { font-size: 1rem; font-weight: 600; color: var(--gray-600); }
+.price-label { display: block; color: var(--gray-500); font-size: 0.85rem; margin-top: 5px; }
+.package-description { color: var(--gray-600); font-size: 0.9rem; margin: 20px 0 0; text-align: center; line-height: 1.6; }
+.package-features {
+    list-style: none;
+    padding: 20px 0 0;
+    margin: 0;
+    flex: 1;
+}
+.package-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 0.92rem;
+    color: var(--gray-700);
+    border-bottom: 1px solid var(--gray-100);
+}
+.package-features li:last-child { border-bottom: none; }
+.package-features li.included i { color: var(--secondary); }
+.package-features li.excluded { color: var(--gray-400); text-decoration: line-through; }
+.package-features li.excluded i { color: var(--gray-400); }
+.package-features li i { margin-top: 3px; flex-shrink: 0; }
+.package-action { margin-top: 25px; }
+.btn-package {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    border: 2px solid var(--pkg-color);
+    background: transparent;
+    color: var(--pkg-color);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: var(--font);
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+}
+.btn-package:hover, .btn-package-primary {
+    background: linear-gradient(135deg, var(--pkg-color), var(--pkg-color)cc);
+    color: #fff;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+.btn-package-primary:hover {
+    box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+}
+@media (max-width: 768px) {
+    .package-popular { transform: none; }
+    .package-popular:hover { transform: translateY(-8px); }
+    .package-card { padding: 25px 20px; }
+    .price-value { font-size: 2rem; }
+}

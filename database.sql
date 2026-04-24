@@ -94,6 +94,54 @@ CREATE TABLE settings (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
+-- Packages / Propositions de Valeur
+CREATE TABLE packages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(200) NOT NULL,
+    slug VARCHAR(200) NOT NULL UNIQUE,
+    subtitle VARCHAR(300),
+    description TEXT,
+    price DECIMAL(10,2) DEFAULT NULL,
+    price_label VARCHAR(100) DEFAULT NULL,
+    duration_months INT DEFAULT 12,
+    icon VARCHAR(50) DEFAULT 'fas fa-box',
+    color VARCHAR(30) DEFAULT '#4ECDC4',
+    badge VARCHAR(100) DEFAULT NULL,
+    is_popular TINYINT(1) DEFAULT 0,
+    is_active TINYINT(1) DEFAULT 1,
+    sort_order INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+-- Package Features
+CREATE TABLE package_features (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    package_id INT NOT NULL,
+    feature_text VARCHAR(500) NOT NULL,
+    is_included TINYINT(1) DEFAULT 1,
+    sort_order INT DEFAULT 0,
+    FOREIGN KEY (package_id) REFERENCES packages(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- Customer Packages / Subscriptions
+CREATE TABLE customer_packages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_name VARCHAR(150) NOT NULL,
+    customer_email VARCHAR(150),
+    customer_phone VARCHAR(30),
+    customer_company VARCHAR(200),
+    customer_city VARCHAR(100),
+    package_id INT,
+    status ENUM('pending','active','expired','cancelled') DEFAULT 'pending',
+    notes TEXT,
+    activated_at DATETIME DEFAULT NULL,
+    expires_at DATETIME DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (package_id) REFERENCES packages(id) ON DELETE SET NULL
+) ENGINE=InnoDB;
+
 -- Visitors Analytics
 CREATE TABLE visitors (
     id INT AUTO_INCREMENT PRIMARY KEY,

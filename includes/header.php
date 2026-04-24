@@ -109,6 +109,7 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
                 </ul>
             </li>
             <li><a href="<?= SITE_URL ?>/catalogue.php" class="<?= $currentPage === 'catalogue' ? 'active' : '' ?>">Catalogue</a></li>
+            <li><a href="<?= SITE_URL ?>/packages.php" class="<?= $currentPage === 'packages' ? 'active' : '' ?>">Nos Packages</a></li>
             <li><a href="<?= SITE_URL ?>/about.php" class="<?= $currentPage === 'about' ? 'active' : '' ?>">À Propos</a></li>
             <li><a href="<?= SITE_URL ?>/contact.php" class="<?= $currentPage === 'contact' ? 'active' : '' ?>">Contact</a></li>
             <li><a href="<?= getWhatsAppGeneralLink() ?>" target="_blank" class="nav-cta"><i class="fab fa-whatsapp"></i> Commander</a></li>
